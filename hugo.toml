@@ -1,7 +1,7 @@
 baseURL = 'https://example.org/'
 DefaultContentLanguage = "en"
 languageCode = "en-us"
-title = "Lightbi"
+title = "Turbulynx"
 theme = "lightbi-hugo"
 metaDataFormat = "yaml"
 pygmentsStyle = "trac"

@@ -1,5 +1,5 @@
 ---
-title: How to use this Hugo theme ?
+title: How to use this Hugo themes ?
 date: 2021-02-02
 tags: ["hugo","blog"]
 image : "/img/posts/img-3.jpg"
