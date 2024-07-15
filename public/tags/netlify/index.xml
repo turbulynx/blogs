@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Netlify on Turbulynx</title>
-    <link>http://localhost:43065/tags/netlify/</link>
+    <link>http://localhost:1313/tags/netlify/</link>
     <description>Recent content in Netlify on Turbulynx</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Jan 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:43065/tags/netlify/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/netlify/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Host in Netlify</title>
-      <link>http://localhost:43065/post/2020/jan/netlify-conf/</link>
-      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:43065/post/2020/jan/netlify-conf/</guid>
-      <description>You can host your static website wth zero cost in Netlify.&#xA;Add the below netlify.toml in the root folder.&#xA;[build] publish = &amp;quot;public&amp;quot; command = &amp;quot;hugo --gc --minify&amp;quot; [context.production.environment] HUGO_VERSION = &amp;quot;0.</description>
+      <title>Deployment Infrastructure.</title>
+      <link>http://localhost:1313/post/2024/jan/deployment-infrastructure/</link>
+      <pubDate>Mon, 15 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2024/jan/deployment-infrastructure/</guid>
+      <description>Objective As a startup, optimizing operational expenditure is crucial to prioritize funds for innovation, ensuring our customers achieve their objectives. We must maintain scalability while upholding our standards such as security, reliability, availability and Performance SLAs.</description>
     </item>
     <item>
-      <title>My first post</title>
-      <link>http://localhost:43065/post/2020/jan/my-first-post/</link>
+      <title>Host in Netlify</title>
+      <link>http://localhost:1313/post/2024/jan/netlify-conf/</link>
       <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:43065/post/2020/jan/my-first-post/</guid>
-      <description>Introduction This is bold text, and this is emphasized text.&#xA;Visit the Hugo website!</description>
+      <guid>http://localhost:1313/post/2024/jan/netlify-conf/</guid>
+      <description>You can host your static website wth zero cost in Netlify.&#xA;Add the below netlify.toml in the root folder.&#xA;[build] publish = &amp;quot;public&amp;quot; command = &amp;quot;hugo --gc --minify&amp;quot; [context.production.environment] HUGO_VERSION = &amp;quot;0.</description>
     </item>
   </channel>
 </rss>

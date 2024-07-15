@@ -1,12 +1,12 @@
 ---
 title: Deployment Infrastructure.
-date: 2020-01-04
+date: 2024-07-15
 tags: ["hugo","Netlify"]
-image : "/img/posts/img-10.jpg"
-Description  : "You can host your static website wth zero cost in Netlify. Add the below netlify.toml in the root. And you can upload the public folder directly..."
+image : "/img/posts/deployment_infrastructure_swirling_cloud.jpg"
+Description  : "Deployment Infrastructure"
 ---
 ## Objective
-Since we're a startup aiming to create an architecture that is both cost-effective and scalable, here we're evaluating various infrastructure options for deploying our microservices.
+As a startup, optimizing operational expenditure is crucial to prioritize funds for innovation, ensuring our customers achieve their objectives. We must maintain scalability while upholding our standards such as security, reliability, availability and Performance SLAs. Simultaneously, empowering developers to focus on customer use-cases instead of infrastructure management is paramount. Therefore, herewe are currently assessing and comparing various deployment infrastructure options to make informed decisions for both current and future needs.
 
 ## Yardsticks to compare the various options
 1. Deployment simplicity
