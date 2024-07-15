@@ -1,0 +1,22 @@
+# Ignore Hugo generated files
+/public/
+/resources/
+/resources/_gen/
+
+# Ignore VSCode settings and local history
+.vscode/
+.history/
+
+# Ignore GitHub specific files
+.github/
+
+# Ignore Hugo configuration file if in root (config.toml or config.yaml)
+/config.toml
+/config.yaml
+
+# Ignore Hugo cache and temporary files
+resources/_gen/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
