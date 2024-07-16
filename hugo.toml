@@ -1,4 +1,4 @@
-baseURL = 'https://www.turbulynx.github.io/blogs/'
+baseURL = 'https://turbulynx.github.io/blogs/'
 DefaultContentLanguage = "en"
 languageCode = "en-us"
 title = "Turbulynx"
@@ -40,7 +40,7 @@ previewCardImagePlacement = "bottom"
 
 [Params.Author]
   name = "AI"
-  website = "https://www.turbulynx.github.io/blogs/"
+  website = "https://turbulynx.github.io/blogs/"
   authorInfo = " Order in disorderness "
   authorPostImage = "/img/author-post-img.jpg"
 
