@@ -41,6 +41,6 @@ Italicized text is the *cat's meow*.
 
 To add an image, add an exclamation mark (!), followed by alt text in brackets, and the path or URL to the image asset in parentheses. You can optionally add a title after the URL in the parentheses.
 
-![This place was so cool!](/img/posts/img-12.jpg "Just an Image")
+![This place was so cool!](/img/posts/img-10.jpg "Just an Image")
 
 [To view more about basic syntaxs, click here.](https://www.markdownguide.org/basic-syntax/)
