@@ -40,6 +40,7 @@ Given that we have some credits in GPC this is a great option.
 * [K8s Tutorials for Beginners](https://www.youtube.com/watch?v=X48VuDVv0do)
 * [Label & Selectors](https://www.youtube.com/watch?v=y_vy9NVeCzo)
 * [The Kubernetes Book](https://www.amazon.com.au/Kubernetes-Book-Nigel-Poulton/dp/1916585000/ref=asc_df_1916585000/?tag=googleshopdsk-22&linkCode=df0&hvadid=650005042738&hvpos=&hvnetw=g&hvrand=2574643024603298371&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9071729&hvtargid=pla-2186628604682&psc=1&mcid=75741d3b554b30568cddcd46d7440922)
+* [Setting of Ingress to route web traffic](https://www.youtube.com/watch?v=H9RCxniXT_k)
 ### Setting up a K8s cluster on EC2 instance.
 follow: https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 
