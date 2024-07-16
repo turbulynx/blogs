@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://www.turbulynx.github.io/blogs/'
 DefaultContentLanguage = "en"
 languageCode = "en-us"
 title = "Turbulynx"
@@ -46,7 +46,7 @@ previewCardImagePlacement = "bottom"
 
 [Author]
   name = "AI"
-  website = "https://turbulynx.github.io/blogs"
+  website = "https://turbulynx.github.io/blogs/"
   email = "sample@gmail.com"
   facebook = "username"
   instagram = "username"
