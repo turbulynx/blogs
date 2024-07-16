@@ -31,7 +31,7 @@ Given that we have some credits in GPC this is a great option.
 ## Using ECS- Fargate
 
 ## Using K8s with EC2
-![Architecture with EC2 K8s](/img/posts/k8s-ec2.jpg)
+![Architecture with EC2 K8s](/blogs/img/posts/k8s-ec2.jpg)
 
 ## Using K8s with EKS
 
