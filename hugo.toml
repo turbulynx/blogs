@@ -39,14 +39,14 @@ description="Your can add your website description here."
 previewCardImagePlacement = "bottom"
 
 [Params.Author]
-  name = "Bino Kochumol Varghese"
-  website = "https://www.binovarghese.com/"
-  authorInfo = "She was born to be free, let her run wild in her own way and you will never lose her."
+  name = "AI"
+  website = "https://www.turbulynx.github.io/blogs/"
+  authorInfo = " Order in disorderness "
   authorPostImage = "/img/author-post-img.jpg"
 
 [Author]
-  name = "Bino Kochumol Varghese"
-  website = "https://binovarghese.com"
+  name = "AI"
+  website = "https://turbulynx.github.io/blogs"
   email = "sample@gmail.com"
   facebook = "username"
   instagram = "username"
