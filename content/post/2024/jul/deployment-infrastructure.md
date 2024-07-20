@@ -16,24 +16,24 @@ One of the principal ideas of our startup is optimizing operational expenditure 
 5. Others such as Performance metrics, Security feature & Compliance.
 6. Flexibility & customization options.
 
-# As such there are 3 options
-1. Using ECS
-    - EC2 
-    - Fargate
-2. using Kubernetes 
-    - EC2 
-    - EKS
-3. GCP
-
-## Using ECS- EC2 
+# As such we have 3 options:
+---
+## Using AWS ECS
+### EC2 
+### Fargate
+---
+## using Kubernetes 
+### EC2 
+![Architecture with EC2 K8s](/blogs/img/posts/k8s-ec2.jpg)
+### EKS
+---
+## using Kubernetes on GCP
 Given that we have some credits in GPC this is a great option.
 
-## Using ECS- Fargate
-
 ## Using K8s with EC2
-![Architecture with EC2 K8s](/blogs/img/posts/k8s-ec2.jpg)
 
-## Using K8s with EKS
+
+### Using K8s with EKS
 
 # Reference
 ## Teams K8s Learning path
