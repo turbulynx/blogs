@@ -58,6 +58,7 @@ There are 3 approaches to EKS
         - restrict traffic between control plane to within a single cluster.
 
 ## Getting started.
+Create the Cluster
 ```shell 
 eksctl create cluster --name=eigenaik8scluster \
                       --region=ap-southeast-2 \
@@ -65,12 +66,14 @@ eksctl create cluster --name=eigenaik8scluster \
                       --version="1.29" \
                       --without-nodegroup 
 ```
+Create the OIDC IAM policies and associate it with the cluster
 ```shell
 eksctl utils associate-iam-oidc-provider \
     --region ap-southeast-2 \
     --cluster eigenaik8scluster \
     --approve
 ```
+Create the node Group.
 ```shell
 eksctl create nodegroup --cluster=eigenaik8scluster \
                         --region=ap-southeast-2 \
@@ -89,20 +92,20 @@ eksctl create nodegroup --cluster=eigenaik8scluster \
                         --alb-ingress-access \
                         --node-private-networking 
 ```
-Verify
+Verify the resources
 ```shell
 eksctl get cluster
 eksctl get nodegroup --cluster=eigenaik8scluster
 ```
 
-ensure no service account with cluster
+Ensure no service account with cluster
 ```shell
 eksctl get iamserviceaccount --cluster=eigenaik8scluster
 ```
 
 Configure kubeconfig for kubectl
 ```shell
-aws eks --region us-east-1 update-kubeconfig --name eigenaik8scluster
+aws eks --region ap-southeast-2 update-kubeconfig --name eigenaik8scluster
 kubectl get nodes
 ```
 Configure IAM Policy
@@ -115,17 +118,18 @@ aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy_latest.json
 ```
-Take a note of the Policy ARN
+Take a note of the Policy ARN or go to aws management console and grab the policy ARN.
 Verify no Service Account Role Exists.
 ```shell
 kubectl get sa -n kube-system
 kubectl get sa aws-load-balancer-controller -n kube-system
 ```
+Create a Service Account. AWS will create an STS token with AWS via the service Account.
 ```shell
 eksctl create iamserviceaccount \
   --cluster=eigenaik8scluster \
   --namespace=kube-system \
-  --name=aws-load-balancer-controller \ 
+  --name=aws-load-balancer-controller \
   --attach-policy-arn=<Replace with IAM Role> \
   --override-existing-serviceaccounts \
   --approve
@@ -151,8 +155,8 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=ap-southeast-2 \
-  --set vpcId=vpc-0165a396e41e292a3 \
-  --set image.repository=602401143452.dkr.ecr.ap-southeast-2.amazonaws.com/amazon/aws-load-balancer-controller
+  --set vpcId=<replace this with your cluster associated vpc id> \
+  --set image.repository=<choose your repo based on region from https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html>
 ```
 Full Verification
 ```shell
@@ -166,3 +170,18 @@ kubectl -n kube-system get deployment aws-load-balancer-controller -o yaml
 kubectl get pods -n kube-system
 kubectl -n kube-system logs -f  <aws load balancer controller pod>
 ```
+[ingress-class.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/ingress-class/ingress-class.yaml)
+[ingress.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/ingress.yaml)
+[nginx.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/nginx-service.yaml)
+[moversly-service.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/moversly-service.yaml)
+
+Create Ingress Class
+```shell
+kubectl apply -f ingress-class
+```
+Create the rest of the resources
+```shell
+kubectl apply -f resources/
+```
+Verify if the Application Load balancer was created. Associate the Route 53 subdomain with Load Balancer. in our case dev.eigenai.co
+![Route53](/blogsimg/post/route-53-dev.png)
