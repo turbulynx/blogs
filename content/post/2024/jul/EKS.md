@@ -17,7 +17,6 @@ https://eksctl.io/installation/
 ### EKS
 Master node is managed by AWS
 
-
 Cons:
 - $75 just for keeping Master node running.
 
@@ -56,11 +55,11 @@ There are 3 approaches to EKS
         - TODO: see other adv. of fargate..
     - VPC (for secure n/w standards)
         - restrict traffic between control plane to within a single cluster.
-
+![](/blogs/img/posts/k8s-eks.drawio.png)
 ## Getting started.
 Create the Cluster
 ```shell 
-eksctl create cluster --name=eigenaik8scluster \
+eksctl create cluster --name=<<put your cluster name here.>> \
                       --region=<<put your region here>> \
                       --zones=<<put your region here>>a,<<put your region here>>b \
                       --version="1.29" \
@@ -70,14 +69,14 @@ Create the OIDC IAM policies and associate it with the cluster
 ```shell
 eksctl utils associate-iam-oidc-provider \
     --region <<put your region here>> \
-    --cluster eigenaik8scluster \
+    --cluster <<put your cluster name here.>> \
     --approve
 ```
 Create the node Group.
 ```shell
-eksctl create nodegroup --cluster=eigenaik8scluster \
+eksctl create nodegroup --cluster=<<put your cluster name here.>> \
                         --region=<<put your region here>> \
-                        --name=eigenaik8scluster-ng-private1 \
+                        --name=<<put your cluster name here.>>-ng-private1 \
                         --node-type=t3.medium \
                         --nodes-min=2 \
                         --nodes-max=4 \
@@ -95,17 +94,17 @@ eksctl create nodegroup --cluster=eigenaik8scluster \
 Verify the resources
 ```shell
 eksctl get cluster
-eksctl get nodegroup --cluster=eigenaik8scluster
+eksctl get nodegroup --cluster=<<put your cluster name here.>>
 ```
 
 Ensure no service account with cluster
 ```shell
-eksctl get iamserviceaccount --cluster=eigenaik8scluster
+eksctl get iamserviceaccount --cluster=<<put your cluster name here.>>
 ```
 
 Configure kubeconfig for kubectl
 ```shell
-aws eks --region <<put your region here>> update-kubeconfig --name eigenaik8scluster
+aws eks --region <<put your region here>> update-kubeconfig --name <<put your cluster name here.>>
 kubectl get nodes
 ```
 Configure IAM Policy
@@ -127,7 +126,7 @@ kubectl get sa aws-load-balancer-controller -n kube-system
 Create a Service Account. AWS will create an STS token with AWS via the service Account.
 ```shell
 eksctl create iamserviceaccount \
-  --cluster=eigenaik8scluster \
+  --cluster=<<put your cluster name here.>> \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --attach-policy-arn=<Replace with IAM Role> \
@@ -136,7 +135,7 @@ eksctl create iamserviceaccount \
 ```
 Verify Service Account
 ```shell
-eksctl  get iamserviceaccount --cluster eigenaik8scluster
+eksctl  get iamserviceaccount --cluster <<put your cluster name here.>>
 kubectl get sa -n kube-system
 kubectl get sa aws-load-balancer-controller -n kube-system
 kubectl describe sa aws-load-balancer-controller -n kube-system
@@ -151,7 +150,7 @@ get image repository latest from [here](https://docs.aws.amazon.com/eks/latest/u
 ```shell
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=eigenaik8scluster \
+  --set clusterName=<<put your cluster name here.>> \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=<<put your region here>> \
@@ -171,13 +170,61 @@ kubectl get pods -n kube-system
 kubectl -n kube-system logs -f  <aws load balancer controller pod>
 ```
 
-## Writing your deployment descriptors:
-# TODO Needs addtn. working on.
-[ingress-class.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/ingress-class/ingress-class.yaml)
-[ingress.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/ingress.yaml)
-[nginx.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/nginx-service.yaml)
-[moversly-service.yaml](https://github.com/turbulynx/eks-deployment-poc/blob/main/resources/moversly-service.yaml)
+ingress-class.yaml
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: eigenai-ingress-class 
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: ingress.k8s.aws/alb
+```
 
+ingress.yaml
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eigenai-cpr-ingress
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: ssl-ingress
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'   
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:828109562156:certificate/9f89e57c-a61d-434d-9ba6-2d57f629ee4f
+spec:
+  ingressClassName: eigenai-ingress-class                
+  defaultBackend:
+    service:
+      name: app3-nginx-nodeport-service
+      port:
+        number: 80     
+  rules:
+    - http:
+        paths:      
+          - path: /apollo-ml
+            pathType: Prefix
+            backend:
+              service:
+                name: apollo-ml-service
+                port: 
+                  number: 80     
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: apollo-nginx-landing-service
+                port: 
+                  number: 80            
+```
 Create Ingress Class
 ```shell
 kubectl apply -f ingress-class
@@ -187,7 +234,7 @@ Create the rest of the resources
 kubectl apply -f resources/
 ```
 Verify if the Application Load balancer was created. Associate the Route 53 subdomain with Load Balancer. in our case dev.eigenai.co
-![Route53](/blogs/img/post/route-53-dev.png)
+![Route53](/blogs/img/posts/route-53-dev.jpg)
 
 
 ---
@@ -342,10 +389,10 @@ replicaCount: 1
 ## Code Pipeline
 Create a Code Pipline with new service role.
 Go to Code pipeline and in the process create a new project and create a code-build.
-![](/blogs/img/post/code-pipeline.png)
+![](/blogs/img/posts/code-pipeline.png)
 These have to be set in the env variables of code-pipeline and code-build both.
 ```
 REPOSITORY_URI=<<put your account-id here>>.dkr.ecr.<<put your region here>>.amazonaws.com/<<put your project name here>>
 EKS_KUBECTL_ROLE_ARN=arn:aws:iam::<<put your account-id here>>:role/EksCodeBuildKubectlRole
-EKS_CLUSTER_NAME=eigenaik8scluster
+EKS_CLUSTER_NAME=<<put your cluster name here.>>
 ```
