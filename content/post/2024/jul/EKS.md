@@ -6,19 +6,17 @@ image : "/img/posts/k8s-eks.jpeg"
 Description  : "Setting up an EKS Cluster and CI/CD"
 ---
 # Objective
-
+The goal is for EigenAI developers to highlight the steps involved in establishing an EKS cluster and create a CI/CD pipeline that deploys to the development environment after a pull request is approved and merged into the release branch.
 # Installation
 ## CLI
 ### awscli
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 ### kubectl
 https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 ### eksctl
 https://eksctl.io/installation/
-### EKS
-Master node is managed by AWS
-
-Cons:
-- $75 just for keeping Master node running.
+# EKS
+One of the advantages of using EKS over self managed cluster in AWS is the management of Master Nodes. AWS takes the responsibility of ensuring that the Master Node is highly available, Secure, Scalable etc with minimal interaction at a cost of about extra $72. Hence the scope of provisioning and maintaining Control Plane, Kubeproxy, Scheduler, kube Controller Manager, etcd etc is taken care as a part of scope of using and paying for EKS. We can thus use one cluster and keep our dev, sit, prod in different namespaces isolated from each other. We can then use Ingress Controllers to route traffic appropriately.
 
 There are 3 approaches to EKS
 1. Self Managed Nodes
@@ -43,7 +41,7 @@ There are 3 approaches to EKS
         - etcd, kubeapiserver, kube-controller (aws managed)
         - Security and best practices taken care by AWS.
         - highly available master node. atleast:
-        - 2 API Servers & 3 etcd nodes across 3 AZ within region.
+        - 2 API Servers & 3 etcd instances, 3 nodes - across 3 AZ within region.
         - auto detect unhealthy control plane and restarts them
     - Worker Nodes & Node Groups (group of EC2 instances for workloads)
         - connect to contorl plane via cluster API server endpoint 
@@ -55,6 +53,8 @@ There are 3 approaches to EKS
         - TODO: see other adv. of fargate..
     - VPC (for secure n/w standards)
         - restrict traffic between control plane to within a single cluster.
+
+## A high-level, approximate architecture.
 ![](/blogs/img/posts/k8s-eks.drawio.png)
 ## Getting started.
 Create the Cluster
@@ -133,6 +133,7 @@ eksctl create iamserviceaccount \
   --override-existing-serviceaccounts \
   --approve
 ```
+
 Verify Service Account
 ```shell
 eksctl  get iamserviceaccount --cluster <<put your cluster name here.>>
@@ -140,6 +141,7 @@ kubectl get sa -n kube-system
 kubectl get sa aws-load-balancer-controller -n kube-system
 kubectl describe sa aws-load-balancer-controller -n kube-system
 ```
+
 Install AWS Load Balancer Controller using [HelmV3](https://helm.sh/docs/intro/install/)
 ```shell
 helm version
@@ -157,6 +159,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set vpcId=<replace this with your cluster associated vpc id> \
   --set image.repository=<choose your repo based on region from https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html>
 ```
+
 Full Verification
 ```shell
 kubectl -n kube-system get deployment 
@@ -235,8 +238,6 @@ kubectl apply -f resources/
 ```
 Verify if the Application Load balancer was created. Associate the Route 53 subdomain with Load Balancer. in our case dev.eigenai.co
 ![Route53](/blogs/img/posts/route-53-dev.jpg)
-
-
 ---
 
 # Export your Account ID
