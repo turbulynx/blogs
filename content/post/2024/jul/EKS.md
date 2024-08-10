@@ -1,5 +1,5 @@
 ---
-title: Deployment Infrastructure.
+title: EKS Deployment Infrastructure.
 date: 2024-07-15
 tags: ["hugo","Netlify"]
 image : "/img/posts/k8s-eks.jpeg"

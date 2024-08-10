@@ -26,6 +26,7 @@ One of the principal ideas of our startup is optimizing operational expenditure 
 ### EC2 
 ![Architecture with EC2 K8s](/blogs/img/posts/k8s-ec2.jpg)
 ### EKS
+![Architecture with EKS](/blogs/img/posts/k8s-eks.drawio.png)
 Master node is managed by AWS
 Pros:
 - Security and best practices taken care by AWS.
