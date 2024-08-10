@@ -1,7 +1,7 @@
 ---
 title: Engineering Questions for onboarding customers.
 date: 2024-07-15
-tags: ["hugo","Netlify"]
+tags: ["EigenAI","Engineering Team"]
 image : "/img/posts/data-analysis-main.jpg"
 Description: "Engineering and Data Considerations for Tailoring Solutions to Customer Use Cases at EigenAI"
 ---

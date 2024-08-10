@@ -1,14 +1,14 @@
 ---
 title: Deployment Infrastructure.
 date: 2024-07-15
-tags: ["hugo","Netlify"]
+tags: ["Deployment infrastructure","Continous Integration/Delivery/Deployment", "AWS", "EC2", "ECS", "EKS"]
 image : "/img/posts/cloud-swirl.jpg"
 Description  : "Assessing Deployment Infrastructure Options to Optimize Expenditure and Empower Innovation in a Startup Environment."
 ---
 # Objective
 One of the principal ideas of our startup is optimizing operational expenditure through frugality, enabling us to prioritize funds for innovation and ensuring our customers achieve their objectives. We must maintain scalability while upholding standards such as security, reliability, availability, and Performance SLAs. Simultaneously, empowering developers to focus on customer use-cases instead of infrastructure management is paramount. Therefore, we are currently assessing and comparing various deployment infrastructure options to make informed decisions for imminent and future needs.
 
-# Yardsticks to compare the various options
+# Considerations:
 1. Deployment simplicity
 2. Scalability potential
 3. Cost effectiveness

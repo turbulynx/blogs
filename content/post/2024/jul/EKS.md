@@ -1,7 +1,7 @@
 ---
 title: EKS Deployment Infrastructure.
 date: 2024-07-15
-tags: ["hugo","Netlify"]
+tags: ["AWS","EKS", "Kubernetes", "Continous Integration/Deployment"]
 image : "/img/posts/k8s-eks.jpeg"
 Description  : "Setting up an EKS Cluster and CI/CD"
 ---

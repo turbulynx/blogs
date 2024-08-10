@@ -1,7 +1,7 @@
 ---
 title: Apache Superset with our Google credits.
 date: 2024-07-15
-tags: ["hugo","Netlify"]
+tags: ["apache superset","gcp"]
 image : "/img/posts/apache-superset.jpg"
 Description  : "Assessing Deployment Infrastructure Options to Optimize Expenditure and Empower Innovation in a Startup Environment."
 ---
