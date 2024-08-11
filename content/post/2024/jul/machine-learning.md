@@ -38,3 +38,23 @@ Combines a small amount of labeled data with a large amount of unlabeled data to
 Trains models to make sequences of decisions by rewarding or penalizing actions to achieve a goal. Computer playing pacman using Machine learning is an example.
 
 # Batch v/s Online Learning:
+## Batch Training
+### What is it?
+Creating model in one go. This involves usually creating trained model on your local machine and using the model to run on a server. 
+### When is it used?
+- Learn model once Predict many times using that model.
+- When the dataset is large.
+- when the algorithm involves huge computing power e.g. Image classification using Convolutional Neural Networks.
+### Example
+- Dog and Cat image Classification
+## Online Training
+### What is it?
+Training in incremental steps. Usually trained on the server (not on local)
+### When is it used?
+- Continously learn and predict. When you want the Prediction to go hand in hand with incremental Learning 
+- This is usually used when the data set is evolving this is also called **Concept drift**.
+- When you have to train on the server with very large dataset.
+- Limitated resources or expensive hardware
+### Examples
+- netflix recommendation engine incrementally learn with new movies
+- email spam identification incremental learning
