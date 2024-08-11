@@ -64,3 +64,5 @@ Training in incremental steps. Usually trained on the server (not on local)
 - [vowpal wabbit](https://vowpalwabbit.org/)
 # Set of Algorithms 
 ---
+# Types of learning - Instance based learning v/s Model based Learning
+---
