@@ -6,7 +6,7 @@ image : "/img/posts/k8s-eks.jpeg"
 Description  : "Setting up an EKS Cluster and CI/CD"
 ---
 # Objective
-The goal is for EigenAI developers to highlight the steps involved in establishing an EKS cluster and create a CI/CD pipeline that deploys to the development environment after a pull request is approved and merged into the release branch.
+The goal is for our developers to highlight the steps involved in establishing an EKS cluster and create a CI/CD pipeline that deploys to the development environment after a pull request is approved and merged into the release branch.
 # Installation
 ## CLI
 ### awscli

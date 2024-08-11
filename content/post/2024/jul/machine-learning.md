@@ -1,7 +1,7 @@
 ---
 title: Machine Learning thought process.
 date: 2024-08-10
-tags: ["EigenAI","Engineering Team", "Machine Learning"]
+tags: ["Engineering Team", "Machine Learning"]
 image : "/img/posts/machine-leaning-thinking.jpeg"
 Description: "Machine Learning Tools and Algorithms at your disposal to Address Customer Use Cases during a Sales Calls"
 ---
