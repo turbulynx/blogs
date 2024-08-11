@@ -77,7 +77,9 @@ Training in incremental steps. Usually trained on the server (not on local)
 | Model Form                   | Requires known model form                                       | Model may not have an explicit form                             |
 | Storage Space                | Generally storing the model requires less space                 | Storing training data requires more space                      |
 
-# Common Reasons for Unsatisfied customer:
+# Customer Satisfaction:
+Customer is the king and satisfied customer is our biggest reward. It's important to learn and document the reasons for bad customer experience, so that we can work on it. 
+## Understanding the Common Reasons for Unsatisfied customer:
 - Inaccurate results, check for:
     - Insufficient Data
     - Poorly Labelled Data
@@ -100,3 +102,4 @@ Training in incremental steps. Usually trained on the server (not on local)
     - Unclear customer objective
     - lack of transparency
     - over promising/under delivery
+    - any knowledge gaps between engineering and data science teams.
