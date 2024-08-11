@@ -58,3 +58,9 @@ Training in incremental steps. Usually trained on the server (not on local)
 ### Examples
 - netflix recommendation engine incrementally learn with new movies
 - email spam identification incremental learning
+### Algorthms that let you do partial or online learning
+- [River - library for streaming data](https://github.com/online-ml/river)
+- [scikit learn - partial_fit](https://scikit-learn.org/0.15/modules/scaling_strategies.html)
+- [vowpal wabbit](https://vowpalwabbit.org/)
+# Set of Algorithms 
+---
