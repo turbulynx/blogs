@@ -68,11 +68,35 @@ Training in incremental steps. Usually trained on the server (not on local)
 ---
 | Aspect                           | Model-Based Learning                                            | Instance-Based Learning                                       |
 |----------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------|
-| **Data Preparation**             | Prepare or preprocess the data for model training               | Prepare or preprocess the data for model training              |
-| **Training and Pattern Discovery** | Train and create a model to discover patterns and then use it to predict | No training; pattern discovery is postponed until scoring query is received |
-| **Model Storage**                | Model stored in a suitable form                                 | No model                                                       |
-| **Generalization**               | Generalize the rules in the model before the scoring instance is seen | Generalizes for each scoring instance individually as and when seen |
-| **Prediction**                   | Predict for unseen scoring instance using the model             | Predicts for unseen scoring instance using training data directly |
-| **Data Usage**                   | Training data discarded after the model is trained              | Data used for each query - full set of training data is needed |
-| **Model Form**                   | Requires known model form                                       | Model may not have an explicit form                             |
-| **Storage Space**                | Generally storing the model requires less space                 | Storing training data requires more space                      |
+| Data Preparation             | Prepare or preprocess the data for model training               | Prepare or preprocess the data for model training              |
+| Training and Pattern Discovery | Train and create a model to discover patterns and then use it to predict | No training; pattern discovery is postponed until scoring query is received |
+| Model Storage                | Model stored in a suitable form                                 | No model                                                       |
+| Generalization               | Generalize the rules in the model before the scoring instance is seen | Generalizes for each scoring instance individually as and when seen |
+| Prediction                   | Predict for unseen scoring instance using the model             | Predicts for unseen scoring instance using training data directly |
+| Data Usage                   | Training data discarded after the model is trained              | Data used for each query - full set of training data is needed |
+| Model Form                   | Requires known model form                                       | Model may not have an explicit form                             |
+| Storage Space                | Generally storing the model requires less space                 | Storing training data requires more space                      |
+
+# Common Reasons for Unsatisfied customer:
+- Inaccurate results, check for:
+    - Insufficient Data
+    - Poorly Labelled Data
+    - Non Representative Data
+        - Sampling Noise
+        - Sampling Bias
+    - Poor Quality Data
+    - Irrelevant Features
+    - Overfitting
+    - Underfitting
+    - Inappropriate Evaluation Metrics
+- Usability Issues
+    - High Cost to Value ratio
+    - Inability to integrate with existing systems
+    - Slow response times
+- Data Privacy concerns
+    - Regulatory Requirements.
+    - Ethical & Bias Concerns
+- User Experience
+    - Unclear customer objective
+    - lack of transparency
+    - over promising/under delivery
