@@ -78,7 +78,8 @@ Training in incremental steps. Usually trained on the server (not on local)
 | Storage Space                | Generally storing the model requires less space                 | Storing training data requires more space                      |
 
 # Customer Satisfaction:
-Customer is the king and satisfied customer is our biggest reward. It's important to learn and document the reasons for bad customer experience, so that we can work on it. 
+Our customers are our top priority, and their satisfaction is our greatest reward. In this document, we outline common obstacles to delivering an exceptional customer experience, so we can proactively address and avoid them.
+
 ## Understanding the Common Reasons for Unsatisfied customer:
 - Inaccurate results, check for:
     - Insufficient Data
@@ -103,3 +104,77 @@ Customer is the king and satisfied customer is our biggest reward. It's importan
     - lack of transparency
     - over promising/under delivery
     - any knowledge gaps between engineering and data science teams.
+- Communication 
+    - communicate to customer in writing on what he is expecting before putting any effort.
+
+# MLDLC (Machine Learning Development Life Cycle)
+1. Frame the problem
+2. Gathering Data, Data Clensing and Processing
+    - Remove duplicates
+    - Remove missing
+    - Remove outliers
+    - Scale the values to same base (like property value needs to consider inflation)
+4. Exploratory Data Analysis (Input and output relationship study)
+    - Vitualization
+    - Univariate, Bi-Variate, Multivariate Analysis (outlier detection)
+    - Imbalanced Data set (more dog photos less cat - how to handle?)
+5. Feature Engineering and selection
+6. Model Training Evaluation and selection
+    - Ensemble learning - combines or aggregates multiple learnings into one
+7. Model Deployment
+8. Testing
+9. Optimizing model
+
+# Stages
+1. Technology Map for EigenAI.
+    - Algorithms & Datastructures
+    - Java 
+    - Python 
+        - tensorflow
+    - Node.
+    - DBMS/SQL
+    - NoSQL
+    - Big Data Tools (Spark, Hadoop, Kafka, Hive)
+    - Cloud Platforms (AWS, GCP)
+    - Data Pipelines (Apache Airflow)
+    - Statistical Programming
+    - SQL
+    - Advanced Excel
+    - Distributed Systems
+    - System Engineering & Systems Design
+
+# Numpy
+- Scalar (0D Tensor)
+    - e.g. (2)
+    ```python
+    import numpy as np
+    a = np.array(2)
+    a # --> array(2)
+    ```
+- Vector (1D Tensor)
+    - e.g. ([1,2,3,4])
+    ```python
+    a = np.array([1,2,3,4])
+    ```
+    this is a **1D vector with 4 dimentions.**. This is a collection of scalars. usecase - timeseries
+- Matrices (2D Tensor)
+    - this is a collection of vectors.
+   ```python
+    import numpy as np
+    a=np.array([[1,2,3,4],[5,6,7,8]])
+    a.shape # (2, 4)
+    ```
+    usecase - computer vision (videos)
+- N Dimentional tensor.
+
+[Lee Vaughan - Python Tools for Scientists_ An Introduction to Using Anaconda, JupyterLab, and Python's Scientific Libraries](https://drive.google.com/drive/folders/1gSIJH06PizsWb41jN4C0geukYSWN-R3n)
+
+# Pandas
+[Lee Vaughan - Python Tools for Scientists_ An Introduction to Using Anaconda, JupyterLab, and Python's Scientific Libraries](https://drive.google.com/drive/folders/1gSIJH06PizsWb41jN4C0geukYSWN-R3n)
+
+# Where to find datasets
+- [Kaggle](kaggle.com)
+- 
+
+
+CB*$6o]YdU|;/HRF

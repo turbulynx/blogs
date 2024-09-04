@@ -1,9 +1,11 @@
 ---
-title: Apache Superset with our Google credits.
+title: Data Visualization using Apache Superset
 date: 2024-07-15
-tags: ["apache superset","gcp"]
+tags: ["apache_superset","gcp", "data_visualization"]
 image : "/img/posts/apache-superset.jpg"
-Description  : "Assessing Deployment Infrastructure Options to Optimize Expenditure and Empower Innovation in a Startup Environment."
+Description  : "Running Apache Superset on GCP using our startup credits, replacing Superset (instead of Tableau) for all Data visualization needs"
 ---
-https://console.cloud.google.com/apis/credentials?project=marine-shell-413519&supportedpurview=project
-https://console.cloud.google.com/compute/instances
+# Installation
+Install from [google cloud marketplace](https://console.cloud.google.com/marketplace/product/google/superset?project=eigenai)
+
+#
