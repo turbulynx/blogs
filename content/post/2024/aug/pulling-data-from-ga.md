@@ -2,7 +2,7 @@
 title: Google Ads Integration with AppFlow
 date: 2024-07-15
 tags: ["app-flow","google ads"]
-image : "/img/posts/apache-superset.jpg"
+image : "/img/posts/google-ads-integration.jpg"
 Description  : "Google Ads pulling Data into S3."
 ---
 # Installation
