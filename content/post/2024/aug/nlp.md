@@ -6,8 +6,9 @@ image : "/img/posts/google-ads-integration.jpg"
 Description  : "Generative AI with NLP LLM: 
 "
 ---
-# 
+# Objective
 
+# Introduction
 ---
 ## NLP Tasks
 - **Language Modelling** : Predict the next word based on the sequence of words that already occurs in a given language. Application: speech recognition, OCR Translation etc.
@@ -39,4 +40,20 @@ Description  : "Generative AI with NLP LLM:
 - **Context**: words and sentences that surround any part of discourse and that helps determine the meaning. Application: Sarcasm detection, summarization, topic modelling.
   - semantics: direct meaning 
   - pragmatics: adds world knowledge and external knowledge.
-  
+
+## Challenges of NLP
+- Ambiguity: two or more meanings of a single passage. e.g. we saw her duck. Common knowledge assumptions. e.g he says Sun rises in the west (assumption that a preson knows sun rises in the east)
+- Creativity
+
+---
+## NLTK library
+NLTK library is most commonly used NLP library. Common text pre-processing steps in NLP: 
+  - Text preprocessing for Tokenization
+  - Stemming
+  - Lemmatization
+  - Word Embedding
+  - Parts of speech tagging
+  - Stop Word removal
+  - Word Sence disambiguation
+  - Named Entity Recognition (NER)
+    
