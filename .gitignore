@@ -20,3 +20,6 @@ resources/_gen/
 # Ignore OS generated files
 .DS_Store
 Thumbs.db
+
+.gitmodules
+themes/
