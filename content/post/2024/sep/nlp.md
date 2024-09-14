@@ -38,7 +38,7 @@ Description  : "Generative AI with NLP LLM:
       - VP - verb phrase
       - PP - prepositional phrase
       - S - sentence at the highest level.
-- **Context**: words and sentences that surround any part of discourse and that helps determine the meaning. Application: Sarcasm detection, summarization, topic modelling.
+- **Context**: words and sentences that surround any part of discourse and that helps determine the meaning. Application: Sarcasm detection, summarization, topic modelling. Made up of:
   - semantics: direct meaning 
   - pragmatics: adds world knowledge and external knowledge.
 
