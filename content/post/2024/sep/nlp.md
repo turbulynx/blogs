@@ -8,7 +8,7 @@ Description  : "Generative AI with NLP LLM:
 ---
 # Objective
 
-# Introduction
+# 1. Introduction
 ---
 ## NLP Tasks
 - **Language Modelling** : Predict the next word based on the sequence of words that already occurs in a given language. Application: speech recognition, OCR Translation etc.
@@ -45,6 +45,21 @@ Description  : "Generative AI with NLP LLM:
 ## Challenges of NLP
 - Ambiguity: two or more meanings of a single passage. e.g. we saw her duck. Common knowledge assumptions. e.g he says Sun rises in the west (assumption that a preson knows sun rises in the east)
 - Creativity
+
+---
+# 2. Pipeline of NLP
+---
+## NLP Pipeline
+Step by step processing of text is known as NLP Pipeline:
+- Data collection
+- Text Cleaning
+- Pre-processing
+- Feature engineering
+- Modeling
+- Evaluation
+- Deployment
+- Monitoring
+---
 
 ---
 ## NLTK library
