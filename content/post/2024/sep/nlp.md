@@ -50,15 +50,6 @@ Description  : "Generative AI with NLP LLM:
 ## NLTK library
 NLTK library is most commonly used NLP library. Common text pre-processing steps in NLP: 
   - Tokenization: breaking up text into smaller pieces called tokens. 
-    - 3 types of tokenizers in NLTK
-      - word_tokenize()
-      - wordpunct_tokenize()
-      - sent_tokenize()
-    - when a tokenization is performed, we get individual tokens. sometimes it is necessary to group multiple tokens into 1.
-      - Unigrams: "Steve" "went" "to" "school"
-      - Bigrams: tokens of two consequtive words in a sentence; "Steve went" "went to" "to school"
-      - Trigrams: tokens of 3; "Steve went to" "went to school"
-      - Ngrams: tokens of n;
   - Stemming
   - Lemmatization
   - Word Embedding
