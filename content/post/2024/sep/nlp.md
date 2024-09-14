@@ -36,7 +36,7 @@ Description  : "Generative AI with NLP LLM:
       ![](/blogs/img/posts/syntax-parse-tree.png)
       - NP - noun phrase
       - VP - verb phrase
-      - PP -
+      - PP - prepositional phrase
       - S - sentence at the highest level.
 - **Context**: words and sentences that surround any part of discourse and that helps determine the meaning. Application: Sarcasm detection, summarization, topic modelling.
   - semantics: direct meaning 
