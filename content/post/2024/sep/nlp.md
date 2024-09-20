@@ -82,7 +82,7 @@ NLTK library is most commonly used NLP library. Common text pre-processing steps
   - Unigrams: "Steve" "went" "to" "school"
   - Bigrams: tokens of two consequtive words in a sentence; "Steve went" "went to" "to school"
   - Trigrams: tokens of 3; "Steve went to" "went to school"
-  - Ngrams: tokens of n;
+  - Ngrams: tokens of n
 
 Setting the stage for tokenization:
 ```python
