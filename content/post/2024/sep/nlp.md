@@ -296,8 +296,8 @@ spaCy is a free open source library for advaned Natural Language Processing in p
 - Serialization - Saving objects to files or byte string.
 ```python
 import spacy
-nlp = spacy.load("en_core_web_sm")
-doc = nlp("Apple is looking at buying U.K startup for $1 billion")
+nlp = spacy.load("en_core_web_sm") # verson of spacy library - english small model
+doc = nlp("Apple is looking at buying U.K startup for $1 billion") # by default the spacy applies tagger, parser, ner
 
 for token in doc:
   print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.shape_, token.is_alpha, token.is_stop)
@@ -314,4 +314,49 @@ for token in doc:
 # $ $ SYM $ quantmod $ False False
 # 1 1 NUM CD compound d False False
 # billion billion NUM CD pobj xxxx True False
+```
+* in the above by default the spacy applies tagger, parser, ner. The steps however can be added or replaced.
+![](https://spacy.io/images/pipeline.svg)
+* first step is tokenization
+![](https://spacy.io/images/tokenization.svg)
+
+```python
+text="Mission impossible is one of the best movies I have watched. I love it."
+print("{:10}|{:15}|{:15}|{:10}|{:10}|{:10}|{:10}|{:10}".format("text", "lemmatization", "partofspeech", "TAG", "DEP", "SHAPE", "ALPHA", "STOP"))
+doc = nlp(text)
+for token in doc:
+  print("{:10}|{:15}|{:15}|{:10}|{:10}|{:10}|{:10}|{:10}".format(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,token.shape_, token.is_alpha, token.is_stop))
+
+# text      |lemmatization  |partofspeech   |TAG       |DEP       |SHAPE     |ALPHA     |STOP      
+# Mission   |mission        |NOUN           |NN        |nsubj     |Xxxxx     |         1|         0
+# impossible|impossible     |ADJ            |JJ        |amod      |xxxx      |         1|         0
+# is        |be             |AUX            |VBZ       |ROOT      |xx        |         1|         1
+# one       |one            |NUM            |CD        |attr      |xxx       |         1|         1
+# of        |of             |ADP            |IN        |prep      |xx        |         1|         1
+# the       |the            |DET            |DT        |det       |xxx       |         1|         1
+# best      |good           |ADJ            |JJS       |amod      |xxxx      |         1|         0
+# movies    |movie          |NOUN           |NNS       |pobj      |xxxx      |         1|         0
+# I         |I              |PRON           |PRP       |nsubj     |X         |         1|         1
+# have      |have           |AUX            |VBP       |aux       |xxxx      |         1|         1
+# watched   |watch          |VERB           |VBN       |relcl     |xxxx      |         1|         0
+# .         |.              |PUNCT          |.         |punct     |.         |         0|         0
+# I         |I              |PRON           |PRP       |nsubj     |X         |         1|         1
+# love      |love           |VERB           |VBP       |ROOT      |xxxx      |         1|         0
+# it        |it             |PRON           |PRP       |dobj      |xx        |         1|         1
+# .         |.              |PUNCT          |.         |punct     |.         |         0|         0
+# I you do not understand sonething
+print(spacy.explain('nsubj')) #nominal subject
+print(spacy.explain('pobj')) #object of preposition
+# print entities
+```
+* Extracting the Named Entities
+```python
+text="Narendra Modi is the PM of India which is a country in the continent of Asia"
+doc = nlp(text)
+for token in doc.ents:
+  print(token)
+# Output
+# Narendra Modi
+# India
+# Asia
 ```
