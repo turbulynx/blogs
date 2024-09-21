@@ -317,6 +317,7 @@ for token in doc:
 ```
 * in the above by default the spacy applies tagger, parser, ner. The steps however can be added or replaced.
 ![](https://spacy.io/images/pipeline.svg)
+
 * first step is tokenization
 ![](https://spacy.io/images/tokenization.svg)
 
@@ -359,4 +360,13 @@ for token in doc.ents:
 # Narendra Modi
 # India
 # Asia
+```
+
+* If you want to see a colourful version of the named entities then,
+```python
+from spacy import displacy
+text="Narendra Modi is the PM of India which is a country in the continent of Asia which embraces Machine Learning"
+doc=nlp(text)
+displacy.render(docs=doc, style="ent",jupyter=True)
+spacy.explain('GPE') #Geo Political Entity
 ```
