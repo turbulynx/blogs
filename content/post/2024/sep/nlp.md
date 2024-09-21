@@ -165,6 +165,48 @@ Simplified sentence reduces the variety of words, making it easier for the model
 * Lancaster Stemmer: Sometimes does over stemming, sometimes non linguistic or meaningless. 
 * Regex Stemmer: morphological affixes.
 
+```python
+from nltk.stem import PorterStemmer
+porter = PorterStemmer()
+words = ['generous', 'generation', 'genorously','generate']
+for word in words:
+  print(f"{word} -> {porter.stem(word)}")
+# Output
+# generous -> gener
+# generation -> gener
+# genorously -> genor
+# generate -> gener
+from nltk.stem import SnowballStemmer
+snowball = SnowballStemmer(language='english')
+words = ['generous', 'generation', 'genorously','generate']
+for word in words:
+  print(f"{word} -> {snowball.stem(word)}")
+# Output
+# generous -> generous
+# generation -> generat
+# genorously -> genor
+# generate -> generat
+from nltk.stem import LancasterStemmer
+lancaster = LancasterStemmer()
+words = ['generous', 'generation', 'genorously','generate']
+for word in words:
+  print(f"{word} -> {lancaster.stem(word)}")
+# Output
+# generous -> gen
+# generation -> gen
+# genorously -> gen
+# generate -> gen
+from nltk.stem import RegexpStemmer
+regex = RegexpStemmer('ing|s$|able$',min=4)
+words = ['generous', 'generation', 'genorously','generate']
+for word in words:
+  print(f"{word} -> {regex.stem(word)}")
+#Output
+# generous -> generou
+# generation -> generation
+# genorously -> genorously
+# generate -> generate
+```
 #### Lemmatization
 Converting the words into root word using Parts of Speech (POS) tag as well as context as a base. Similar to stemming but brings context to the words and the result is a word in the dictionary. 
 * Applications e.g. search engine and compacting
@@ -173,3 +215,18 @@ Converting the words into root word using Parts of Speech (POS) tag as well as c
 * ate → eat
 * ate → eat
 * eating → eat
+
+```python
+import nltk
+from nltk.stem import WordNetLemmatizer
+nltk.download('wordnet')
+lemma = WordNetLemmatizer()
+words = ['generous', 'generation', 'genorously','generate']
+for word in words:
+  print(f"{word} -> {lemma.lemmatize(word)}")
+# Output
+# generous -> generous
+# generation -> generation
+# genorously -> genorously
+# generate -> generate
+```
