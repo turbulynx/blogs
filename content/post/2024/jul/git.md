@@ -1,11 +1,12 @@
 ---
-title: Git Setup.
+title: Maintaining multiple Github accounts on your local.
 date: 2024-07-15
 tags: ["git"]
-image : "/img/posts/cloud-swirl.jpg"
+image : "/img/posts/github-multiple-faces.jpg"
 Description  : "Multiple git credentials for different accounts"
 ---
 # Seperate folder structure
+```  
   Code
   ├── eigenai
   │   ├── ...
@@ -16,6 +17,7 @@ Description  : "Multiple git credentials for different accounts"
   └── personal
       ├── ...
       └── .gitconfig-personal
+```
 
 # edit your - .gitconfig-personal
 ```
