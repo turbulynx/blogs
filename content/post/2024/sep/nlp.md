@@ -230,3 +230,52 @@ for word in words:
 # genorously -> genorously
 # generate -> generate
 ```
+
+# Named Entity Recognition
+* First step in the information extraction
+* NER seeks to locate and classify named entities into pre-defined categories such as names of person, Organization, location etc. e.g. Modi, America, Apple Inc, Tesla
+
+## Challenges:
+- Word sense disambiguiation: method by which meaning of the word is determined from the context it is used.
+- Example: bark, cinnamon bark or sound made by dog is bark.
+- when the two sentences passed to the algorithm word sense disambiguiation comes into picture, it removes the ambiguity. 
+
+## Application:
+* Text mining
+* Information extraction
+* used alongside with Lexicography
+* Information retrieval process
+
+## Algorithm:
+**Lesk Algorithm:** based on the idea that words in each region will have a similar meaning.
+```python
+from nltk.wsd import lesk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
+a1=lesk(word_tokenize('The building has a device to jam the signal'), 'jam')
+print(a1, a1.definition())
+a2=lesk(word_tokenize('I am stuck in a traffic jam'), 'jam')
+print(a2, a2.definition())
+a3=lesk(word_tokenize('I like to eat jam with bread'), 'jam')
+print(a3, a3.definition())
+#Output
+# Synset('jamming.n.01') deliberate radiation or reflection of electromagnetic energy for the purpose of disrupting enemy use of electronic devices or systems
+# Synset('jam.v.05') get stuck and immobilized
+# Synset('jam.v.06') crowd or pack to capacity --> Somehow this isn't coming correct
+```
+
+## Named Entity Recognition
+```python
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+text="Apple is an American company based out of California"
+for w in nltk.word_tokenize(text):
+  for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(w))):
+    if hasattr(chunk, 'label'):
+      print(chunk.label(), ' '.join(c[0] for c in chunk))
+# Output - GPE stands for Geo political entity
+# GPE Apple
+# GPE American
+# GPE California
+``` 
