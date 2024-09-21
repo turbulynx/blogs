@@ -136,3 +136,40 @@ filtered_data
 ```
 
 ### Stemming, Lemmatization
+#### Stemming
+Reducing a word or part of a word to its stem or root form. It lowers the inflection (process we do inorder to modify the word in order to communicate mini-gramatical categories like tensors, voices, aspect, gender, mood etc. added to communicate to other person) of words into their root form. This is a pre-processing activity.
+Using the same word in different inflected forms in a text can lead to redundancy in natural language processing tasks. By reducing inflection, we decrease the number of unique words that machine learning models need to process.
+
+**Example 1**
+* Without Inflection: Original sentence: "She runs every day, and they are running in the park while he ran yesterday."
+Inflected forms: runs, running, ran
+* With Reduced Inflection:Simplified sentence: "She run every day, and they run in the park while he run yesterday." In this simplified version, we use "run" for all forms.
+* Impact: Original sentence has three different inflected forms, which can create redundancy for a natural language processing model.
+Simplified sentence reduces the variety of words, making it easier for the model to analyze the core action (running) without getting bogged down by different forms.
+
+**Example 2**
+
+* after stemming Generate → Generat also Generation → Generat
+* Stemming can create non-dictionary forms (like "generat"). It's important to note that in stemming, the goal is to reduce words to their root form, which might not always be a valid dictionary word. The main purpose of stemming is to reduce data redundancy by grouping related words together. The primary aim is to reduce the variety of word forms to improve processing efficiency and analysis.
+
+**Uses:**
+- SEO
+- Text mining
+- Web-search
+- Indexing
+- Tagging.
+
+**4 Types of Stemming Algorithms:**
+* Porter Stemmer: Martin Porter invented it and Original Stemmer algorithm. Ease of use and rapid. 
+* Snowball Stemmer: Also invented by same guy. more presise than porter stemmer.
+* Lancaster Stemmer: Sometimes does over stemming, sometimes non linguistic or meaningless. 
+* Regex Stemmer: morphological affixes.
+
+#### Lemmatization
+Converting the words into root word using Parts of Speech (POS) tag as well as context as a base. Similar to stemming but brings context to the words and the result is a word in the dictionary. 
+* Applications e.g. search engine and compacting
+**Example:**
+* eats → eat
+* ate → eat
+* ate → eat
+* eating → eat
