@@ -279,3 +279,39 @@ for w in nltk.word_tokenize(text):
 # GPE American
 # GPE California
 ``` 
+# spaCy Library
+spaCy is a free open source library for advaned Natural Language Processing in python for production use. NLTK was for research purpose. spaCy is for production use. Can handle and process large volume of text.
+## Features
+- Tokenization 
+- Parts of Speech Tagging - word types of tokens, like verb or noun.
+- Dependency Parsing
+- Lemmatization
+- Sentence Boundary Detection (SBD) - finding and segmenting individual sentences.
+- Named Entity Recognition
+- Entity Linking (EL)- Disambiguating texual entities to unique identifiers ina knowledge base.
+- Similarity - comparing words, text apans and documents and how similar they are to each other.
+- Text Classification - assigning caterfores or labels to a whole document or parts of it.
+- Rule based Matching - finding sequence of token based on their texts and linguistic annotations, similar to regular expressions.
+- Training - updating and improving a statstical models predictions
+- Serialization - Saving objects to files or byte string.
+```python
+import spacy
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("Apple is looking at buying U.K startup for $1 billion")
+
+for token in doc:
+  print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_, token.shape_, token.is_alpha, token.is_stop)
+
+# Output
+# Apple Apple PROPN NNP nsubj Xxxxx True False
+# is be AUX VBZ aux xx True True
+# looking look VERB VBG ROOT xxxx True False
+# at at ADP IN prep xx True True
+# buying buy VERB VBG pcomp xxxx True False
+# U.K U.K PROPN NNP dobj X.X False False
+# startup startup VERB VB dep xxxx True False
+# for for ADP IN prep xxx True True
+# $ $ SYM $ quantmod $ False False
+# 1 1 NUM CD compound d False False
+# billion billion NUM CD pobj xxxx True False
+```
