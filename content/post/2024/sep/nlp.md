@@ -417,43 +417,9 @@ NLP pipeline has multiple steps as mentioned above. This step comes in the featu
 
 **Application:** Sentiment analysis (positive and negative sentiments). Harry potter was good, a movie was good - they are classified into the same bag.
 
+### Write your own Bow Representation
 ```python
-# use the countvectorize or just write your own python code after finding the unique words
-from sklearn.feature_extraction.text import CountVectorizer
-import re
-t1 = "dog eats meat!"
-t2 = "mAn eats meat."
-t3 = "man, eaTs dog!!!"
-sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()).split(), 
-             re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()).split(), 
-             re.sub(r"[^a-zA-Z0-9]", " ", t3.lower()).split()]
-
-all_words = [word for words in sentences for word in words] # return variable - then first for.. then second for
-unique_words = set(all_words)
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(unique_words)
-bag_of_words = X.toarray()
-feature_names = vectorizer.get_feature_names_out()
-print("Feature Names (Vocabulary):", feature_names)
-print("Bag of Words Representation:")
-print(bag_of_words)
-#Output
-# Feature Names (Vocabulary): ['dog' 'eats' 'man' 'meat']
-# Bag of Words Representation:
-# [[1 0 0 0]
-#  [0 0 1 0]
-#  [0 0 0 1]
-#  [0 1 0 0]] 
-```
-### Disadvantages:
-* Size of the vector increases with the size of the vocabulary
-* Sparsity (property of being scattered) is still an issue.
-* Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
-
-# BYO Bow Representation
-```python
-# use the countvectorize or just write your own python code after finding the unique words
-from sklearn.feature_extraction.text import CountVectorizer
+# if you are adventrous and dont want to use the Count Vectorize..
 import pandas as pd
 import re
 t1 = "dog eats meat everyday!"
@@ -482,3 +448,36 @@ bow(all_words, sentences)
 # 1    0     1     1         0    1     1   1  1      1       0
 # 2    1     1     0         0    1     0   0  0      0       1
 ```
+
+
+```python
+# use the countvectorize or just write your own python code after finding the unique words
+from sklearn.feature_extraction.text import CountVectorizer
+import re
+t1 = "dog eats meat everyday!"
+t2 = "mAn eats meat once in a while."
+t3 = "man, eaTs dog rarely!!!"
+sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t3.lower())]
+all_words = [word for words in sentences for word in words] # return variable - then first for.. then second for
+unique_words = set(all_words)
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(sentences)
+bag_of_words = X.toarray()
+feature_names = vectorizer.get_feature_names_out()
+print("Feature Names (Vocabulary):", feature_names)
+print("Bag of Words Representation:")
+print(bag_of_words)
+#Output
+# Feature Names (Vocabulary): ['dog' 'eats' 'everyday' 'in' 'man' 'meat' 'once' 'rarely' 'while']
+# Bag of Words Representation:
+# [[1 1 1 0 0 1 0 0 0]
+#  [0 1 0 1 1 1 1 0 1]
+#  [1 1 0 0 1 0 0 1 0]]
+```
+### Disadvantages:
+* Size of the vector increases with the size of the vocabulary
+* Sparsity (property of being scattered) is still an issue.
+* Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
+
