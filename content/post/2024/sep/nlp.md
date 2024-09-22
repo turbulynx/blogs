@@ -419,7 +419,7 @@ NLP pipeline has multiple steps as mentioned above. This step comes in the featu
 
 ### Write your own Bow Representation
 ```python
-# if you are adventrous and dont want to use the Count Vectorize..
+# if you are adventrous and dont want to use the Count Vectorizer.
 import pandas as pd
 import re
 t1 = "dog eats meat everyday!"
@@ -448,13 +448,16 @@ bow(all_words, sentences)
 # 1    0     1     1         0    1     1   1  1      1       0
 # 2    1     1     0         0    1     0   0  0      0       1
 ```
-
+### Disadvantages:
+* Size of the vector increases with the size of the vocabulary
+* Sparsity (property of being scattered) is still an issue.
+* Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
 
 ```python
 # use the countvectorize or just write your own python code after finding the unique words
 from sklearn.feature_extraction.text import CountVectorizer
 import re
-t1 = "dog eats meat everyday!"
+t1 = "dog dog dog dog, dog eats meat everyday!"
 t2 = "mAn eats meat once in a while."
 t3 = "man, eaTs dog rarely!!!"
 sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()), 
@@ -472,12 +475,51 @@ print(bag_of_words)
 #Output
 # Feature Names (Vocabulary): ['dog' 'eats' 'everyday' 'in' 'man' 'meat' 'once' 'rarely' 'while']
 # Bag of Words Representation:
-# [[1 1 1 0 0 1 0 0 0]
+# Feature Names (Vocabulary): ['dog' 'eats' 'everyday' 'in' 'man' 'meat' 'once' 'rarely' 'while']
+# Bag of Words Representation:
+# [[5 1 1 0 0 1 0 0 0]
 #  [0 1 0 1 1 1 1 0 1]
 #  [1 1 0 0 1 0 0 1 0]]
+# See the count of 5 against dog. it not only counts it also describes it
 ```
-### Disadvantages:
-* Size of the vector increases with the size of the vocabulary
-* Sparsity (property of being scattered) is still an issue.
-* Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
+
+Now even if you want it as a unigram, bigram and trigram thats also possible.
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+import re
+import pandas as pd
+t1 = "dog dog dog dog, dog eats meat everyday!"
+t2 = "mAn eats meat once in a while."
+t3 = "man, eaTs dog rarely!!!"
+sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t3.lower())]
+all_words = [word for words in sentences for word in words] 
+unique_words = set(all_words)
+vectorizer = CountVectorizer(ngram_range=(1,3)) # See here <--
+X = vectorizer.fit_transform(sentences)
+bag_of_words = X.toarray()
+feature_names = vectorizer.get_feature_names_out()
+print("Feature Names (Vocabulary):", feature_names)
+print("Bag of Words Representation:")
+pd.DataFrame(bag_of_words)
+#Output
+# Feature Names (Vocabulary): ['dog' 'dog dog' 'dog dog dog' 'dog dog eats' 'dog eats' 'dog eats meat'
+#  'dog rarely' 'eats' 'eats dog' 'eats dog rarely' 'eats meat'
+#  'eats meat everyday' 'eats meat once' 'everyday' 'in' 'in while' 'man'
+#  'man eats' 'man eats dog' 'man eats meat' 'meat' 'meat everyday'
+#  'meat once' 'meat once in' 'once' 'once in' 'once in while' 'rarely'
+#  'while']
+# Bag of Words Representation:
+# 0	1	2	3	4	5	6	7	8	9	...	19	20	21	22	23	24	25	26	27	28
+# 0	5	4	3	1	1	1	0	1	0	0	...	0	1	1	0	0	0	0	0	0	0
+# 1	0	0	0	0	0	0	0	1	0	0	...	1	1	0	1	1	1	1	1	0	1
+# 2	1	0	0	0	0	0	1	1	1	1	...	0	0	0	0	0	0	0	0	1	0
+# 3 rows × 29 columns
+```
+### Pros and Cons
+- has the ability to capture the context and word order information in the form of n-grams
+- Documents  having the same ngrams will have vectors closer to each other in euclidean space as compared to documents with different ngrams.
+- As n increased the dimensionlity (sparsity) increases
+- issue related to out of vocabulary problem exists
 
