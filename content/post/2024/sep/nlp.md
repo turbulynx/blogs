@@ -51,10 +51,10 @@ Description  : "Generative AI with NLP LLM:
 ---
 ## NLP Pipeline
 Step by step processing of text is known as NLP Pipeline:
-- Data collection
-- Text Cleaning
-- Pre-processing
-- Feature engineering
+- Data collection (scrapy)
+- Text Cleaning 
+- Pre-processing (stemming and lemmetization)
+- Feature engineering (one hot encoding, bag of words technique)
 - Modeling
 - Evaluation
 - Deployment
@@ -369,4 +369,116 @@ text="Narendra Modi is the PM of India which is a country in the continent of As
 doc=nlp(text)
 displacy.render(docs=doc, style="ent",jupyter=True)
 spacy.explain('GPE') #Geo Political Entity
+```
+
+# NLP Text Vectorization
+Convertion of raw text into numerical form is called Text Vectorization. Machine learning expects text in numerical form. This is also called Feature Extraction.
+Many ways of achieving feature extraction:
+1. One Hot Encoding
+2. Count Vectorizer
+3. TF-IDF
+4. Word Embeddings
+
+## One Hot Encoding
+Every word including symbols are written in the vector form. This vector will only have 0 & 1s. each word is written or encoded as a one hot vector, each word will have different vector representation. example:
+
+| Color  | Red | Blue | Green |
+|--------|-----|------|-------|
+| Red    |  1  |  0   |   0   |
+| Blue   |  0  |  1   |   0   |
+| Green  |  0  |  0   |   1   |
+| Red    |  1  |  0   |   0   |
+| Green  |  0  |  0   |   1   |
+
+```python
+corpus = ['dog eats meat','man eats meat']
+from sklearn.preprocessing import OneHotEncoder
+one_hot = OneHotEncoder()
+all_in_one = [indi.split() for indi in corpus]
+one_hot.fit_transform(all_in_one).toarray()
+#Output
+# [['dog', 'eats', 'meat'], ['man', 'eats', 'meat']]
+# array([[1., 0., 1., 1.],
+#        [0., 1., 1., 1.]])
+```
+
+we generally dont use the scikitlearn onehotencoding directly as it's mainly for structured data not for unstructured data.
+
+### Disadvantages
+* Size of the one hot encoding is propotional to the size of the vocabulary.
+* Sparse representation of data
+* Insufficent in storing, computing and learning from data.
+* No sequence of words is considered and is ignored.
+* If words outside the vocabulary exists there is no way to deal with it.
+* Word context is not considered in the representation.
+
+## Bag of Words technique (BoW)
+NLP pipeline has multiple steps as mentioned above. This step comes in the feature engineering step. Classical text represenation technique. Representation of the text under the consideration of bag of words. Text is characterised by a unique set of words. e.g. movie was bad; movie was excellent. This is characterised by the unique set of words not based on where it occurs in the sentence. so if the word bad it will be in one bag and excellent it will be in a different bag.
+
+**Application:** Sentiment analysis (positive and negative sentiments). Harry potter was good, a movie was good - they are classified into the same bag.
+
+```python
+# use the countvectorize or just write your own python code after finding the unique words
+from sklearn.feature_extraction.text import CountVectorizer
+import re
+t1 = "dog eats meat!"
+t2 = "mAn eats meat."
+t3 = "man, eaTs dog!!!"
+sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()).split(), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()).split(), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t3.lower()).split()]
+
+all_words = [word for words in sentences for word in words] # return variable - then first for.. then second for
+unique_words = set(all_words)
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(unique_words)
+bag_of_words = X.toarray()
+feature_names = vectorizer.get_feature_names_out()
+print("Feature Names (Vocabulary):", feature_names)
+print("Bag of Words Representation:")
+print(bag_of_words)
+#Output
+# Feature Names (Vocabulary): ['dog' 'eats' 'man' 'meat']
+# Bag of Words Representation:
+# [[1 0 0 0]
+#  [0 0 1 0]
+#  [0 0 0 1]
+#  [0 1 0 0]] 
+```
+### Disadvantages:
+* Size of the vector increases with the size of the vocabulary
+* Sparsity (property of being scattered) is still an issue.
+* Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
+
+# BYO Bow Representation
+```python
+# use the countvectorize or just write your own python code after finding the unique words
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+import re
+t1 = "dog eats meat everyday!"
+t2 = "mAn eats meat once in a while."
+t3 = "man, eaTs dog rarely!!!"
+sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()).split(), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()).split(), 
+             re.sub(r"[^a-zA-Z0-9]", " ", t3.lower()).split()]
+
+all_words = [word for words in sentences for word in words] # return variable - then first for.. then second for
+unique_words = set(all_words)
+
+def bow(all, sentences):
+  results = []
+  for sentence in sentences:
+    result = {word: 0 for word in all}
+    for word in sentence:
+      result[word] = 1
+    results.append(result)
+  print(pd.DataFrame(results))
+
+bow(all_words, sentences)
+# Output
+# dog  eats  meat  everyday  man  once  in  a  while  rarely
+# 0    1     1     1         1    0     0   0  0      0       0
+# 1    0     1     1         0    1     1   1  1      1       0
+# 2    1     1     0         0    1     0   0  0      0       1
 ```
