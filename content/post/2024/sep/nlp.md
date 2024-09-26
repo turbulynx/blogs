@@ -246,7 +246,7 @@ for word in words:
 * used alongside with Lexicography
 * Information retrieval process
 
-## Algorithm:
+## Word Sence disambiguation:
 **Lesk Algorithm:** based on the idea that words in each region will have a similar meaning.
 ```python
 from nltk.wsd import lesk
