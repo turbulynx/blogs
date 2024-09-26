@@ -523,3 +523,44 @@ pd.DataFrame(bag_of_words)
 - As n increased the dimensionlity (sparsity) increases
 - issue related to out of vocabulary problem exists
 
+## TF-IDF 
+- Term Frequency (TF) * Inverse Document Frequency (IDF)
+- quantify a word in a set of documents.
+- importance of words in the given context is represented here.
+
+**Terminology**
+t - term
+d - document (set of words)
+N - count of corpus
+corpus - the total document set.
+e.g. 'This Dress is so beautiful' - how is the computer to know that the important words here are dress and beautiful? thats where TF*IDF shines.
+
+* TF - number of times a particular word appears in a sentence.
+e.g. Sun rises in East; frequency of Sun - 1/4
+* IDF - Dress is beautiful; is isn't adding any importance. stop words needs to be weightage reduced particularly when these words are used more freqently it's importance will increase. IDF measures the informativeness of term t. it will be low for stop words. inverse document frequency ```formula: idf(t) = log(N/(df+1))```
+
+hence, ```TF-IDF formula: tf-idf(t,d) = tf(t,d) * log(N/(df+1)) ```
+where, **N** - total number of documents in the corpus & **df** - number of document with term t.
+ e.g. lets say sentences: 
+
+ ```python
+ import math
+s1='man eats pizza'
+s2='dog eats food'
+s3='ant eats pizza'
+# for man in s1 → tf = 1/3 
+# idf = log₂(3/1) 
+tf = 1/3 
+idf = math.log(3/2)
+tf_idf = tf *  idf
+print(tf_idf) # 0.13515503603605478
+# for eats in s1 → tf = 1/3 
+tf = 1/3
+idf = math.log(3/4)
+tf_idf = tf*idf
+print(tf_idf) #-0.09589402415059363
+# hence eats is not a very important word.
+```
+## implement the tf-idf using scikit
+
+## Pros and cons of the tf-idf technique
