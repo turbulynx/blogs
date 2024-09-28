@@ -453,6 +453,7 @@ bow(all_words, sentences)
 * Sparsity (property of being scattered) is still an issue.
 * Does not capture the similarity between words (not context aware). 'I eat', 'I ate', 'I ran' Bag of Words Vectors for all the three documents will be equally apart - in layman terms - 'eat and ran' and 'eat and ate' will be same distance apart.
 
+
 ```python
 # use the countvectorize or just write your own python code after finding the unique words
 from sklearn.feature_extraction.text import CountVectorizer
@@ -482,6 +483,8 @@ print(bag_of_words)
 #  [1 1 0 0 1 0 0 1 0]]
 # See the count of 5 against dog. it not only counts it also describes it
 ```
+```Note: ``` vectorizer = CountVectorizer(**binary=True**)``` if you dont want actual counts but just 1s and 0s.
+
 
 Now even if you want it as a unigram, bigram and trigram thats also possible.
 ```python
