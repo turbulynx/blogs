@@ -458,32 +458,29 @@ bow(all_words, sentences)
 # use the countvectorize or just write your own python code after finding the unique words
 from sklearn.feature_extraction.text import CountVectorizer
 import re
+import pandas as pd
 t1 = "dog dog dog dog, dog eats meat everyday!"
-t2 = "mAn eats meat once in a while."
-t3 = "man, eaTs dog rarely!!!"
+t2 = "man eats meat once in a while."
+t3 = "man eaTs dog rarely!!!"
 sentences = [re.sub(r"[^a-zA-Z0-9]", " ", t1.lower()), 
              re.sub(r"[^a-zA-Z0-9]", " ", t2.lower()), 
              re.sub(r"[^a-zA-Z0-9]", " ", t3.lower())]
 all_words = [word for words in sentences for word in words] # return variable - then first for.. then second for
 unique_words = set(all_words)
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(sentences)
+# vectorizer = CountVectorizer(binary=True) --> use this for sentiment analysis  
+vectorizer = CountVectorizer()  
+X = vectorizer.fit_transform([t1, t2, t3])
+print(sentences)
 bag_of_words = X.toarray()
 feature_names = vectorizer.get_feature_names_out()
-print("Feature Names (Vocabulary):", feature_names)
-print("Bag of Words Representation:")
-print(bag_of_words)
-#Output
-# Feature Names (Vocabulary): ['dog' 'eats' 'everyday' 'in' 'man' 'meat' 'once' 'rarely' 'while']
-# Bag of Words Representation:
-# Feature Names (Vocabulary): ['dog' 'eats' 'everyday' 'in' 'man' 'meat' 'once' 'rarely' 'while']
-# Bag of Words Representation:
-# [[5 1 1 0 0 1 0 0 0]
-#  [0 1 0 1 1 1 1 0 1]
-#  [1 1 0 0 1 0 0 1 0]]
-# See the count of 5 against dog. it not only counts it also describes it
+pd.DataFrame(bag_of_words, columns=feature_names)
+# Output
+# dog	eats	everyday	in	man	meat	once	rarely	while
+# 0	5	1	1	0	0	1	0	0	0
+# 1	0	1	0	1	1	1	1	0	1
+# 2	1	1	0	0	1	0	0	1	0
 ```
-```Note: ``` vectorizer = CountVectorizer(**binary=True**)``` if you dont want actual counts but just 1s and 0s.
+```Note: ``` vectorizer = CountVectorizer(**binary=True**)``` if you dont want actual counts but just 1s and 0s. This is a technique used specific to sentiment classification
 
 
 Now even if you want it as a unigram, bigram and trigram thats also possible.
@@ -527,6 +524,7 @@ pd.DataFrame(bag_of_words)
 - issue related to out of vocabulary problem exists
 
 ## TF-IDF 
+- a word most repeated in one document but not in any other documents are considered more  important. Stop words however dont fall into this category. 
 - Term Frequency (TF) * Inverse Document Frequency (IDF)
 - quantify a word in a set of documents.
 - importance of words in the given context is represented here.
@@ -541,6 +539,10 @@ e.g. 'This Dress is so beautiful' - how is the computer to know that the importa
 * TF - number of times a particular word appears in a sentence.
 e.g. Sun rises in East; frequency of Sun - 1/4
 * IDF - Dress is beautiful; is isn't adding any importance. stop words needs to be weightage reduced particularly when these words are used more freqently it's importance will increase. IDF measures the informativeness of term t. it will be low for stop words. inverse document frequency ```formula: idf(t) = log(N/(df+1))```
+
+```
+IDF(word)=log10(total number of documents/ (1+number of documents containing the word))
+```
 
 hence, ```TF-IDF formula: tf-idf(t,d) = tf(t,d) * log(N/(df+1)) ```
 where, **N** - total number of documents in the corpus & **df** - number of document with term t.
@@ -564,6 +566,82 @@ tf_idf = tf*idf
 print(tf_idf) #-0.09589402415059363
 # hence eats is not a very important word.
 ```
+## tf-idf hands on
+```python
+import pandas as pd
+import math
+import sklearn
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+stop_words = stopwords.words('english')
+first_sent = "Data science is an amazing career in the current world"
+second_sent = "Deep learning is a subset of machine learning"
+first_sent = [word for word in first_sent.split() if word not in stop_words]
+second_sent = [word for word in second_sent.split() if word not in stop_words]
+vocabulary = set(first_sent).union(set(second_sent))
+word_dict1 = dict.fromkeys(vocabulary, 0)
+word_dict2 = dict.fromkeys(vocabulary, 0)
+for word in first_sent:
+  word_dict1[word] += 1
+for word in second_sent:
+  word_dict2[word] += 1
+# Count Vectorization representation.
+df = pd.DataFrame([word_dict1,word_dict2]) 
+
+# Term Frequency - number of occurances of the word/total number of words
+freq1 = {}
+freq2 = {}
+for word in vocabulary:
+  freq1[word] = word_dict1[word]/len(first_sent)
+  freq2[word] = word_dict2[word]/len(second_sent)
+
+pd.DataFrame([freq1, freq2])
+```
 ## implement the tf-idf using scikit
+it is supposed to be something like this. Below isn't fully working need to check why.
+```python
+import pandas as pd
+import math
+import sklearn
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+stop_words = stopwords.words('english')
+first_sent = "Data machine science is an amazing career in the current world"
+second_sent = "Deep learning is a subset of machine learning"
+first_sent = [word for word in first_sent.split() if word not in stop_words]
+second_sent = [word for word in second_sent.split() if word not in stop_words]
+vocabulary = set(first_sent).union(set(second_sent))
+word_dict1 = dict.fromkeys(vocabulary, 0)
+word_dict2 = dict.fromkeys(vocabulary, 0)
+for word in first_sent:
+  word_dict1[word] += 1
+for word in second_sent:
+  word_dict2[word] += 1
+# Count Vectorization representation.
+df = pd.DataFrame([word_dict1,word_dict2]) 
+
+def calculateTF(doc):
+  # To be implemented
+  pass
+
+def calculateIDF(docs):
+  # To be implemented
+  pass
+
+def calculateTFIDF(tfBagOfWords, idfs):
+  print(idfs)
+  tfIdf = {}
+  for word, value in tfBagOfWords.items():
+    tfIdf[word] = value*idfs[word]
+  return tfIdf
+
+# Term Frequency - number of occurances of the word/total number of words
+pd.DataFrame([
+    calculateTFIDF(calculateTF(word_dict1), calculateIDF([word_dict1, word_dict2])),
+    calculateTFIDF(calculateTF(word_dict2), calculateIDF([word_dict1, word_dict2]))
+    ])
+```
 
 ## Pros and cons of the tf-idf technique
