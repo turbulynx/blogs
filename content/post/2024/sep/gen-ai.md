@@ -1,6 +1,6 @@
 ---
 title: Generative AI  
-date: 2024-07-11
+date: 2024-08-11
 tags: ["Chatbots", "RASA", "ChatGPT", "BERT", "Transformers", "Prompt Engineering"]
 image : "/img/posts/generative-ai-intro.jpeg"
 Description  : "Generative AI with NLP LLM: 
@@ -724,7 +724,35 @@ Then i changed the message to give negative and dark response. This time the res
 6) model fine tuning functionality.
 7) with chatgpt can only use GPT 3.5 or 4, with openai several other models are available read: https://platform.openai.com/docs/models
 ### Costing:
-Tokens & Pricing
+Tokens & Pricing:
+same as tokenization above a given text is converted and represented as numbers. Pricing is based on the tokens, bigger prompts will incur larger costs. To use we have to get the Secret key to make API calls.
 
+```python
+import openai
+from openai import OpenAI
+from sk import openai_key # my own file with a variable openai_key='sk-proj-4D1ID8ZeQ...'
 
+client = OpenAI(api_key=openai_key)
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    max_tokens=2,
+    temperature=2, # degree of randomness, 0 is predictable.
+    n=3,  
+    messages=[
+        {
+            "role": "user", 
+            "content": "where there is a will there is a "
+        }
+    ]
+)
+
+for idx, choice in enumerate(response.choices):
+    print(f"Response {idx+1}: {choice['message']['content']}")
+
+# Output 
+# Response 1: way.
+# Response 2: plan.
+# Response 3: chance.
+# note that 2 tokens - 'way' and '.'
+```
 
