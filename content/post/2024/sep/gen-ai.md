@@ -1,8 +1,8 @@
 ---
-title: Generative AI - NLP 
+title: Generative AI  
 date: 2024-07-11
 tags: ["Chatbots", "RASA", "ChatGPT", "BERT", "Transformers", "Prompt Engineering"]
-image : "/img/posts/natural-language-processing.jpeg"
+image : "/img/posts/generative-ai-intro.jpeg"
 Description  : "Generative AI with NLP LLM: 
 "
 ---
@@ -644,4 +644,87 @@ pd.DataFrame([
     ])
 ```
 
+## implement using sklearn
+```python
+import sklearn
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+first_sent = "Data science is an amazing career in the current world"
+second_sent = "Deep learning is a subset of machine learning"
+vec = TfidfVectorizer()
+result = vec.fit_transform([first_sent, second_sent])
+pd.DataFrame(result.toarray(), columns=vec.get_feature_names_out())
+# Output
+# amazing	an	career	current	data	deep	in	is	learning	machine	of	science	subset	the	world
+# 0	0.324336	0.324336	0.324336	0.324336	0.324336	0.000000	0.324336	0.230768	0.000000	0.000000	0.000000	0.324336	0.000000	0.324336	0.324336
+# 1	0.000000	0.000000	0.000000	0.000000	0.000000	0.342871	0.000000	0.243956	0.685743	0.342871	0.342871	0.000000	0.342871	0.000000	0.000000
+```
+
 ## Pros and cons of the tf-idf technique
+### Advantages
+- use this to calculate the similarity between two texts using similarity measures like Cosing similarity/Euclidean distance
+- has application in text classification, information retrieval etc.
+- better than earlier methods.
+### Disadvantages
+- high dimentionality
+- They are still discrete representation of units of text, hence unable to capture relation between words
+- sparse and high dimension
+- cannot handle OOV (Out of Vocabulary) words.
+---
+# TBC
+---
+https://www.youtube.com/watch?v=tFHeUSJAYbE&list=PLz-ep5RbHosU2hnz5ejezwaYpdMutMVB0
+# Large Language Models (LLMs)
+is a type of Language Model. Quantatively it is the number of model parameters vary from 10 to 100 billion parameters per model. Qualitatively also called emergent properties starts emerging - properties in large language model that do not appear in small language models, e.g. zero shot learning - capability of a model to complete a task it is not explicitely trained to do.
+
+In the earlier days the model was trained using supervised learning we use thousands if not millions of examples - but with LLMs we use self-supervised learning. Train a very large model in a very large corpus of data. In self-supervised learning doesn't require manual labelling of each example. The labels or the targets of the model defined from the inherent structure of the data itself.
+
+One of the popular way of doing this is "next word prediction paradigm". There is not just one word but many that can go after ***listen to your....***. What the llm would do is to use probablistic distribution of next word given the previous word. in the above example the words could be heart or gut or body or parents etc.. each with different probability distribution. Its essentially trained on a large set of data with so many examples of corpus of data - so it can statistically predict the next set of data. Important thing is the context matters - if for example we add the word ***don't*** in front of ***listen to your...***, the probably distribution will entirely change.
+
+Autoregression Task formula: ***P(tn | tn-1,..., tn-m)*** P(tn) given n tokens.
+
+This is how LLMs like chatgpt works.
+# 3 levels of Using LLMs
+- Level 1: Prompt Engineering
+  - using LLM out of the box - not changing any model parameters. Two ways to do this 
+    - using an agent like chatgpt
+    - using open AI API or hugging face tranformers library: help to interact with LLMs programmatically using python for example. Pay per api call in case of open API. Hugging face transformer library is an open source option, you can run the models locally in this case so no need to send your proprietary data into 3rd party or open ai.
+- Level 2: Model Fine Tuning
+  - adjusting model parameters for a particular tasks.
+  - steps
+    - Step 1: pre-trained models are obtained. (usually trained by self supervised learning). in this step the base model is learning useful representations for a wide variety of tasks.
+    - Step 2: update model parameters given task-specific examples (trained by supervised learning or even reinforcement learning).e.g. chatgpt, the model we use here is a fine tuned model learnt by reinforcement learning. Some techniques is lora or low range adaptation. another technique is reinforcement learning based on human feedback (RLHF).
+    - Step 3: Deploy the fine tuned large language model.
+- Level 3: Build your own.
+  - This is only for 1% of all usecases. 
+  - One example usecase: in a large company we dont want to use open source models where security is a concern, dont want to send data to 3rd party via an API. 
+  - Another usecase is you want to create your own model and commercialize it.
+  - At a high level steps are:
+    - get the data or corpus.
+    - pre process and refine it 
+    - model training
+    - pre trained llm.
+    - then go to step 2.
+
+## Connecting to AI using API, Programmatically
+### OpenAIs Python API
+It's similar to chatGPT but with Python. In both we pass a request and use the language modelling to predict the next word. Apart from the difference in the web interface in chatgpt and here programmatically some differences are as follows. most of the below aren't possible with chatgpt but programmatically possible with openai python.
+1) Customizable System message: Message or prompt or a set of instructions that help define the tone, personality and functionality of the model during a conversation. This helps model how to respond to user input and what constraints to follow. I customized the message in chatgpt first to give back sarcastic answers.
+![](/blogs/img/posts/chatgpt-customized-system-message.png)
+![](/blogs/img/posts/chatgpt-customized-system-message-output.png)
+Then i changed the message to give negative and dark response. This time the results were entirely opposite.
+![](/blogs/img/posts/chatgpt-customized-system-message-dark.png)
+2) Adjust input parameter 
+  - max response length: response length sent back by model
+  - number of responses: (number of outputs you may want to programmatically select one of the response e.g.)
+  - temperature: randomness of response generated by the model.
+3) Process image and other types
+4) extact helful word embeddings for downstream tasks
+5) input audio for transcription and tranlations
+6) model fine tuning functionality.
+7) with chatgpt can only use GPT 3.5 or 4, with openai several other models are available read: https://platform.openai.com/docs/models
+### Costing:
+Tokens & Pricing
+
+
+
