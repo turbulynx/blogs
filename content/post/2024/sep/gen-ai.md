@@ -769,8 +769,10 @@ other things that can be done
 - text generation etc.
 
 ```python
+! pip install transformers
 from transformers import pipeline
 sentiment_pipeline = pipeline(task="sentiment-analysis")
+# sentiment_pipeline = pipeline(task="sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
 texts = [
     """One is that the mining giant's shares are pushing higher this morning.
         In early trade, the Big Australian's shares are 1.5% higher to $45.74.
@@ -783,4 +785,11 @@ for text, result in zip(texts, results):
 **Question**: How does it decide if a text is positive or negative without perception?
 ### signup and logininto huggingface
 - lookup for transformer tag and select a model. Then you will check also for pytorch tag. This is because hugging face also supports models which aren't just compatible with pytorch and transformers but also others.
-- The train button on the right will have options like Amazon Sagemaker, NVIDIA NDX Cloud, AutoTrain which will help jump start the model tuning part. 
+- The train button on the right will have options like Amazon Sagemaker, NVIDIA NDX Cloud, AutoTrain which will help jump start the model finetuning part.
+-  
+### Getting started
+to get started copy the [hf-env.yml](https://github.com/ShawhinT/YouTube-Blog/blob/26dff2786a7d64620e5e7dd71fcd51a416aad1db/LLMs/hugging-face/hf-env.yml) file into your code repository.
+
+```bash
+conda env create --file hf-env.yml
+```
