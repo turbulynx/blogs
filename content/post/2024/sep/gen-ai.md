@@ -755,4 +755,14 @@ for idx, choice in enumerate(response.choices):
 # Response 3: chance.
 # note that 2 tokens - 'way' and '.'
 ```
+## Hugging face Transformer library
+Major hub for open source Machine learning (ML) like Dockerhub for docker. It has models, dataset (its own data used to train models) and spaces (for building and deploying machine learning applications).
 
+### Transformers library
+Downloading and training machine learning models in python. Like NLP, computer vision, audio processing etc. E.g. for sentiment analysis - find the model that does sentiment analysis classification task then you have to take raw text convert into numerical value that is then passed to the model; finally decode the numerical output of the output to get the label of the text. This can be done easily in the transformers library using a pipeline function. 
+other things that can be done 
+- summarization
+- translation
+- question-answering
+- feature extraction 
+- text generation etc.  
