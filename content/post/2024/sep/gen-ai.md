@@ -803,12 +803,10 @@ print(model_outputs[0])
 # Output
 # [{'label': 'disappointment', 'score': 0.4666951894760132}, {'label': 'sadness', 'score': 0.39849498867988586}, {'label': 'annoyance', 'score': 0.06806593388319016}, {'label': 'neutral', 'score': 0.05703023821115494}, {'label': 'disapproval', 'score': 0.044239308685064316}, {'label': 'nervousness', 'score': 0.014850745908915997}, {'label': 'realization', 'score': 0.014059904962778091}, {'label': 'approval', 'score': 0.0112674655392766}, {'label': 'joy', 'score': 0.006303396541625261}, {'label': 'remorse', 'score': 0.006221492309123278}, {'label': 'caring', 'score': 0.006029403302818537}, {'label': 'embarrassment', 'score': 0.0052654859609901905}, {'label': 'anger', 'score': 0.004981426056474447}, {'label': 'disgust', 'score': 0.004259029403328896}, {'label': 'grief', 'score': 0.0040021371096372604}, {'label': 'confusion', 'score': 0.003382918192073703}, {'label': 'relief', 'score': 0.0031405005138367414}, {'label': 'desire', 'score': 0.00282747158780694}, {'label': 'admiration', 'score': 0.002815794898197055}, {'label': 'fear', 'score': 0.002707520266994834}, {'label': 'optimism', 'score': 0.0026164911687374115}, {'label': 'love', 'score': 0.0024883910082280636}, {'label': 'excitement', 'score': 0.0024494787212461233}, {'label': 'curiosity', 'score': 0.0023743617348372936}, {'label': 'amusement', 'score': 0.001746696187183261}, {'label': 'surprise', 'score': 0.0014529851032420993}, {'label': 'gratitude', 'score': 0.0006464761681854725}, {'label': 'pride', 'score': 0.00055424973834306}]
 ```
-another example for summarization
+yet another example for summarization
 ```python
 from transformers import pipeline
-
 summarizer = pipeline("summarization", model="Falconsai/text_summarization")
-
 ARTICLE = """ 
 Hugging Face: Revolutionizing Natural Language Processing
 Introduction
@@ -834,4 +832,5 @@ Hugging Face's story is one of transformation, collaboration, and empowerment. T
 print(summarizer(ARTICLE, max_length=1000, min_length=30, do_sample=False))
 >>> [{'summary_text': 'Hugging Face has emerged as a prominent and innovative force in NLP . From its inception to its role in democratizing AI, the company has left an indelible mark on the industry . The name "Hugging Face" was chosen to reflect the company\'s mission of making AI models more accessible and friendly to humans .'}]
 ```
-finally, you can chain together multiple objects for example first do a text summarization and then do a sentiment analysis.
+finally, you can chain together multiple objects for example first do a text summarization and then do a sentiment analysis. 
+Another interesting task is conversational text. 
