@@ -894,9 +894,48 @@ example of this [Llama chatbot](https://huggingface.co/spaces/huggingface-projec
 # Prompt Engineering
 ## What is Prompt Engineering
 Prompt engineering refers to the process of designing and refining the input (or "prompt") given to an AI language model, like GPT, to produce desired outputs. It's kind of the future of computer programming in Natural Language. Language models are not designed to peform a task, all that it does is to predict the next token, thus you can trick the model into solving your problem.
+Example of a prompt:
+```
+---
 
+**Prompt:**
+
+You are an intelligent system that processes natural language queries and selects the most relevant SQL query from a given list. Based on the user's question, match the correct SQL query that will retrieve the desired information from a database.
+
+**Input:**
+
+- **User Query (NLP):** The user asks a question in natural language, describing the data they want from the database.
+- **SQL Queries List:** A list of SQL queries is provided as possible answers.
+
+**Task:**
+
+- Analyze the user's natural language question.
+- Select the most appropriate SQL query from the list that best answers the user's question.
+
+**Example:**
+
+- **User Query:** "What are the names and email addresses of all customers who made a purchase in the last 30 days?"
+- **SQL Queries List:**
+    1. `SELECT * FROM customers WHERE purchase_date > '2023-09-01';`
+    2. `SELECT name, email FROM customers WHERE purchase_date > NOW() - INTERVAL 30 DAY;`
+    3. `SELECT id, name FROM orders WHERE status = 'complete';`
+    4. `SELECT email FROM customers WHERE created_at > NOW() - INTERVAL 1 YEAR;`
+
+**Expected Output:**
+
+- The system should select query 2: `SELECT name, email FROM customers WHERE purchase_date > NOW() - INTERVAL 30 DAY;`
+```
 ## Two ways of implementing Prompt Enginner
 * Easy way - using an Agent like ChatGPT. You can't really use it to integrate it into another app.
 * Programmatically integrate using python or similar.
+
+## 7 Tricks for prompt engineering
+1. Be Descriptive
+2. Give Examples
+3. Use Structured Text
+4. Chain of Thoughts
+5. Chatbot personas
+6. Flipped Approach
+7. Reflective, Review and Refine
 
 
