@@ -890,3 +890,13 @@ you can post this in hugging face spaces or [hf.co/spaces](hf.co/spaces). They a
 example of this [Llama chatbot](https://huggingface.co/spaces/huggingface-projects/llama-3.2-vision-11B).
 * Go to hf.co/spaces and click on create new space.
 * follow the instructions to clone the repo and push your code.
+
+# Prompt Engineering
+## What is Prompt Engineering
+Prompt engineering refers to the process of designing and refining the input (or "prompt") given to an AI language model, like GPT, to produce desired outputs. It's kind of the future of computer programming in Natural Language. Language models are not designed to peform a task, all that it does is to predict the next token, thus you can trick the model into solving your problem.
+
+## Two ways of implementing Prompt Enginner
+* Easy way - using an Agent like ChatGPT. You can't really use it to integrate it into another app.
+* Programmatically integrate using python or similar.
+
+
