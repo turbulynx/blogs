@@ -832,5 +832,20 @@ Hugging Face's story is one of transformation, collaboration, and empowerment. T
 print(summarizer(ARTICLE, max_length=1000, min_length=30, do_sample=False))
 >>> [{'summary_text': 'Hugging Face has emerged as a prominent and innovative force in NLP . From its inception to its role in democratizing AI, the company has left an indelible mark on the industry . The name "Hugging Face" was chosen to reflect the company\'s mission of making AI models more accessible and friendly to humans .'}]
 ```
+Other transformers like ```Falconsai/text_summarization``` to use is the ```facebook/bart-large-cnn``` for text summarization.
+
 finally, you can chain together multiple objects for example first do a text summarization and then do a sentiment analysis. 
-Another interesting task is conversational text. 
+Another interesting task is conversational text. For this we can use the ```facebook/blenderbot-400M-distill```. There is supposed to be a class called ```Conversation``` (also imported from transformers) which is supposed to be a container for conversation. 
+```python
+from transformers import pipeline
+
+chatbot = pipeline(model="facebook/blenderbot-400M-distill")
+conversation_history = "Hello, how are you?"
+response = chatbot(conversation_history)
+print(response)
+
+# Continue the conversation
+conversation_history += f" {response[0]['generated_text']}"
+response = chatbot(conversation_history)
+print(response)
+```
