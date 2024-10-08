@@ -849,3 +849,39 @@ conversation_history += f" {response[0]['generated_text']}"
 response = chatbot(conversation_history)
 print(response)
 ```
+There is a library called **Gradio** to make it conversational. Gradio is very similar to streamlit. 
+```python
+import gradio as gr
+from transformers import pipeline
+
+# Load the chatbot model
+chatbot = pipeline(model="facebook/blenderbot-400M-distill")
+
+# Function to handle chatbot conversation
+def respond(user_input, history=[]):
+    # Add the user input to the conversation history
+    history = history or []
+    history.append(f"User: {user_input}")
+    print(history)
+    # Generate a response
+    response = chatbot(user_input)
+    bot_reply = response[0]['generated_text']
+    print(bot_reply)
+
+    # Add the bot reply to the history
+    history.append(f"Bot: {bot_reply}")
+    
+    # Return the entire conversation history as a string
+    return "\n".join(history), history
+
+# Create the Gradio interface
+demo = gr.Interface(
+    fn=respond,  # The function that processes input
+    inputs=[gr.Textbox(label="Your Message here:"), gr.State([])],  # Input is a message and conversation history
+    outputs=[gr.Textbox(label="Response here:"), gr.State([])],  # Output is updated conversation and history
+    title="AI Chatbot"
+)
+
+# Launch the interface
+demo.launch()
+```
