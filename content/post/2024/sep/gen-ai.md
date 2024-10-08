@@ -945,3 +945,36 @@ You are an intelligent system that processes natural language queries and select
 
 ## ChatGPT v/s GPT3.0
 ChatGPT is a finetuned model - easy to get useful responses, however with GPT 3.0 that isn't the case and more work is to be done on prompt engineering side - it just does work prediction. 
+
+## LangChain
+LangChain is a framework designed to help developers build applications that leverage language models (like GPT) more effectively by integrating them with other tools, data sources, and workflows. It simplifies the process of creating applications that combine various natural language processing tasks with external data, APIs, and user interactions.
+
+```python
+from langchain import HuggingFaceHub
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+import os
+
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
+hugging_face_llm = HuggingFaceHub(repo_id="google/flan-t5-base", model_kwargs={"temperature": 0.5})
+
+prompt_template = PromptTemplate(
+    input_variables=["question"],
+    template="""You are the teacher, and you are running a surprise test to see who are the attentive kids. 
+    The questions will be in the form 
+    :\nQuestion: {question}"""
+)
+
+qa_chain = LLMChain(llm=hugging_face_llm, prompt=prompt_template)
+question = "What is the capital of France?"
+response = qa_chain.run({"question": question})
+print(response)
+
+question = "What is the name of indias PM?"
+response = qa_chain.run({"question": question})
+print(response)
+
+# Output
+# Paris
+# Narendra Modi
+```
