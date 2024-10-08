@@ -885,3 +885,4 @@ demo = gr.Interface(
 # Launch the interface
 demo.launch()
 ```
+![](/blogs/img/posts/gradio-initial.png)
