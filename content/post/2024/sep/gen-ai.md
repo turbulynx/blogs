@@ -886,3 +886,7 @@ demo = gr.Interface(
 demo.launch()
 ```
 ![](/blogs/img/posts/gradio-initial.png)
+you can post this in hugging face spaces or [hf.co/spaces](hf.co/spaces). They allow to create ML applications and host it here.
+example of this [Llama chatbot](https://huggingface.co/spaces/huggingface-projects/llama-3.2-vision-11B).
+* Go to hf.co/spaces and click on create new space.
+* follow the instructions to clone the repo and push your code.
