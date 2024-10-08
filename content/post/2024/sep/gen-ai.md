@@ -930,12 +930,18 @@ You are an intelligent system that processes natural language queries and select
 * Programmatically integrate using python or similar.
 
 ## 7 Tricks for prompt engineering
-1. Be Descriptive
+1. Be Descriptive - give a context around the problem
 2. Give Examples
 3. Use Structured Text
-4. Chain of Thoughts
-5. Chatbot personas
-6. Flipped Approach
-7. Reflective, Review and Refine
+   ```
+   give me the recipe for making chocolate cookies, give it in the format
+   **Title**: Chocolate Cookie Recipe
+   **Description**: .......
+   ```
+5. Chain of Thoughts
+6. Chatbot personas
+7. Flipped Approach
+8. Reflective, Review and Refine
 
-
+## ChatGPT v/s GPT3.0
+ChatGPT is a finetuned model - easy to get useful responses, however with GPT 3.0 that isn't the case and more work is to be done on prompt engineering side - it just does work prediction. 
