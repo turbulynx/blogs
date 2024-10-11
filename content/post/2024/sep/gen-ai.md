@@ -933,14 +933,28 @@ You are an intelligent system that processes natural language queries and select
 1. Be Descriptive - give a context around the problem
 2. Give Examples
 3. Use Structured Text
-   ```
-   give me the recipe for making chocolate cookies, give it in the format
-   **Title**: Chocolate Cookie Recipe
-   **Description**: .......
-   ```
+    ```
+    give me the recipe for making chocolate cookies, give it in the format
+    **Title**: Chocolate Cookie Recipe
+    **Description**: .......
+    ```
 5. Chain of Thoughts
-6. Chatbot personas
-7. Flipped Approach
+    ```
+    Make me a resume for a job application at Google.
+    Step 1: Write an objective
+    Step 2: Write an introduction about my overall work experience. they are...
+    Step 3: Write in detail each experience.
+    Step 4: Summary and conclusion.
+    ```
+6. Chatbot personas: 
+    ```
+    Act as an travel guide who knows everything about Sydney. Make me a travel itenaryfor weekend in Sydney in your Aussie Accent.
+    ```
+7. Flipped Approach:
+    The generic response might not be of interest to you hence we have depend on a conversational model. This is useful when you dont know what exactly you want. e.g.
+    ```
+    I want you to ask me questions to help me come up with an LLM based application idea. Ask me one question at a time to keep things conversational..
+    ```
 8. Reflective, Review and Refine
 
 ## ChatGPT v/s GPT3.0
@@ -948,14 +962,19 @@ ChatGPT is a finetuned model - easy to get useful responses, however with GPT 3.
 
 ## LangChain
 LangChain is a framework designed to help developers build applications that leverage language models (like GPT) more effectively by integrating them with other tools, data sources, and workflows. It simplifies the process of creating applications that combine various natural language processing tasks with external data, APIs, and user interactions.
+```shell
+pip install langchain
+pip install langchain-community langchain-core
+pip install huggingface_hub
+```
 
 ```python
-from langchain import HuggingFaceHub
+from langchain import HuggingFaceHub # or use openai
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 import os
 
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = '<your hf token>'
 hugging_face_llm = HuggingFaceHub(repo_id="google/flan-t5-base", model_kwargs={"temperature": 0.5})
 
 prompt_template = PromptTemplate(
@@ -978,3 +997,6 @@ print(response)
 # Paris
 # Narendra Modi
 ```
+## Model fine Tuning
+
+https://www.youtube.com/watch?v=eC6Hd1hFvos&list=PLz-ep5RbHosU2hnz5ejezwaYpdMutMVB0&index=5
