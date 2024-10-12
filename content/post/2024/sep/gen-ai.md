@@ -1018,10 +1018,27 @@ A smaller fine tuned model can outperform a larger base model. This involves tak
         - curating your training dataset
         - Fine tuning the model.
         - done in 5 steps:
-          1. Choose fine tuning task
+          1. Choose fine tuning task. it could be anything e.g.
+              - could be text summarization
+              - could be text generation
+              - text/binary classification what ever you want to do..
           2. Prepare training dataset.
+              - e.g. if text summarization then the input/output pairs of text in desired summarization generate a training corpus using for e.g. a prompt template 
           3. Choose a base model.
+              - lots of foundantal llms for e.g. or fine tuned llms.
+              - use this as the starting point.
           4. Fine-tune model via supervised learning
+              - There are 3 different options:
+                  1. retrain all the parameters: here we tweak all the parameters, the computation cost is very very very high.
+                  2. transfer learning: here we freeze most of the parameters only fine tune the head. cheaper than full retaining all the parameters.
+                  3. Parameter Efficient Fine Tuning (PEFT): here we freeze all the weights or parameters instead of most. Instead we augment the model with additional parameters that are trainable. Advantage is we can fine tune the model with a relatively small set of model parameters as against the above approaches.
+                  - One of the ways to do this is LoRA (Low Rank Adaptation). In short fine tune model by adding new trainable parameters.
+                  ![](https://miro.medium.com/v2/resize:fit:640/format:webp/1*GmCISYhd-JLqHNEvAQU1tQ.png)
+                  the first component here h(x) = Wox is what looks like a model without LoRA. Wo has weights that are all trainable. her Wo is a d by k (dxk) matrix with d*k trainable parameters. e.g. d=1000, k=1000 Wo is a 1,000,000 trainable parameters. But with LoRA the ΔWx, another weight matrix with the same shape as Wo. 
+
+                  To simplify things lets just represent ΔW as a product of two terms B and A (BA) hence we can represent ΔW in terms of a 2 one dimentional arrays or vectors A and B, which essentially generates the new h(x).
+
+                  In this case Wox itself if frozen but B and A are trainable. hence in the above context d = 1000 and k = 1000 hence (d*r)+(r*k) for intrensic rank or r = 2 which translates into 4000 trainable parameters as against the million parameters.
           5. Evaluate the model performance.
     - Train Reward model
         - generating a score for language models completetion. highscore for correct answer and low score for an incorrect answer.
