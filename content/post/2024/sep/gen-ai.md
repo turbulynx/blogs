@@ -998,5 +998,25 @@ print(response)
 # Narendra Modi
 ```
 ## Model fine Tuning
-
-https://www.youtube.com/watch?v=eC6Hd1hFvos&list=PLz-ep5RbHosU2hnz5ejezwaYpdMutMVB0&index=5
+A smaller fine tuned model can outperform a larger base model. This involves taking an existing or pre-trained model like GPT 3 for a specific usecase like ChatGPT (GPT-3.5-turbo).
+3 ways to fine tune:
+1. Self Supervised learning 
+    - you get the Training Corpus of data can cater to your usecase.
+    - you then use this corpus of text and you train the model in a self supervise way.
+2. Supervised Learning 
+    - here you have a set of inputs and outputs e.g. feed in who is the 35th president of the US? and output JFK.
+    - So having these question answer pairs we can train the model how to answer questions.
+    - One way of doing this is via prompt templates.
+      ```
+      Please answer the following questions
+      Q: {Question}
+      A: {Answer}
+      ```
+    -  Through this process we could translate the training data set to a series of prompts and generate a training corpus and go back to the self supervised process.
+3. Reinforcement Learning -
+    - Supervised Fine tunning, two steps:
+        - curating your training dataset
+        - Fine tuning the model.
+    - Train Reward model
+        - generating a score for language models completetion. highscore for correct answer and low score for an incorrect answer.
+    - Reinforcement learning with Favourite algorithm
