@@ -1017,6 +1017,15 @@ A smaller fine tuned model can outperform a larger base model. This involves tak
     - Supervised Fine tunning, two steps:
         - curating your training dataset
         - Fine tuning the model.
+        - done in 5 steps:
+          1. Choose fine tuning task
+          2. Prepare training dataset.
+          3. Choose a base model.
+          4. Fine-tune model via supervised learning
+          5. Evaluate the model performance.
     - Train Reward model
         - generating a score for language models completetion. highscore for correct answer and low score for an incorrect answer.
+        - start with a prompt pass it into supervised fine tuned model. this you do multiple times and then assign human labels and then use the ranking to train the rewards model. 
     - Reinforcement learning with Favourite algorithm
+        - example in the case of ChatGPT it uses PPO or Proximal Policy Optimization
+        - you give the prompt and pass it into supervised fine tuned model and pass it back to reward model. The reward model then will give feedback to the finetuned model, this is how you update the model parameters. 
